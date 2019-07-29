@@ -1,6 +1,7 @@
 # Boilermaker
 
 Johnny Kirpalani
+David Rusyniak
 
 _Good things come in pairs_
 
