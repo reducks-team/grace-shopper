@@ -24,13 +24,13 @@ const Product = db.define('products', {
     }
   },
   price: {
-    type: Sequelize.NUMBER
+    type: Sequelize.FLOAT
   },
   inventory: {
-    type: Sequelize.NUMBER
+    type: Sequelize.INTEGER
   },
   tags: {
-    type: Sequelize.ARRAY
+    type: Sequelize.ARRAY(Sequelize.STRING)
   }
 })
 
