@@ -3,10 +3,27 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const User = db.define('user', {
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isEmail: true
+    }
   },
   password: {
     type: Sequelize.STRING,
@@ -26,6 +43,54 @@ const User = db.define('user', {
   },
   googleId: {
     type: Sequelize.STRING
+  },
+  phoneNumber: {
+    type: Sequelize.NUMBER
+  },
+  streetAddress: {
+    type: Sequelize.STRING
+  },
+  AddressLineTwo: {
+    type: Sequelize.STRING
+  },
+  city: {
+    type: Sequelize.STRING
+  },
+  state: {
+    type: Sequelize.STRING
+  },
+  country: {
+    type: Sequelize.STRING
+  },
+  postalCode: {
+    type: Sequelize.NUMBER
+  },
+  billingStreetAddress: {
+    type: Sequelize.STRING
+  },
+  billingAddressLineTwo: {
+    type: Sequelize.STRING
+  },
+  billingCity: {
+    type: Sequelize.STRING
+  },
+  billingState: {
+    type: Sequelize.STRING
+  },
+  billingCountry: {
+    type: Sequelize.STRING
+  },
+  billingPostalCode: {
+    type: Sequelize.NUMBER
+  },
+  creditCardNumber: {
+    type: Sequelize.NUMBER
+  },
+  expirationDate: {
+    type: Sequelize.DATE
+  },
+  securityCode: {
+    type: Sequelize.NUMBER
   }
 })
 
