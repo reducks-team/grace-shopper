@@ -64,12 +64,14 @@ async function seed() {
       isActive: false,
       shippedTo: users[0],
       cardBilled: {},
-      product: [products[0].id, products[1].id]
+      product: [products[0].id, products[1].id],
+      userId: users[0].id
     }),
     Order.create({
       isActive: true,
       shippedTo: null,
-      cardBilled: null
+      cardBilled: null,
+      userId: users[1].id
     })
   ])
 

@@ -15,6 +15,9 @@ const Order = db.define('orders', {
   },
   product: {
     type: Sequelize.ARRAY(Sequelize.INTEGER)
+  },
+  userId: {
+    type: Sequelize.INTEGER
   }
 })
 
