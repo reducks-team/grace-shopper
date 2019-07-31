@@ -19,9 +19,9 @@ const defaultUser = {
 /**
  * ACTION CREATORS
  */
-const gotSingleUser = user => ({type: GET_USER, user})
-const removeUser = user => ({type: REMOVE_USER, user})
-const updateUser = user => ({type: UPDATE_USER, user})
+const gotSingleUser = singleUser => ({type: GET_USER, singleUser})
+//const removeUser = user => ({type: REMOVE_USER, user})
+//const updateUser = user => ({type: UPDATE_USER, user})
 
 /**
  * THUNK CREATORS
@@ -76,7 +76,7 @@ export const logout = () => async dispatch => {
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-      return {...state, user: action.user}
+      return {...state, singleUser: action.user}
     case REMOVE_USER:
       return state
     case UPDATE_USER:
