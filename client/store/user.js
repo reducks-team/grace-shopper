@@ -34,7 +34,7 @@ export const me = () => async dispatch => {
     console.error(err)
   }
 }
-// get singe user THUNK
+// get single user THUNK
 export const getUser = id => async dispatch => {
   try {
     const {user} = await axios.get(`/api/users/:${id}`)
@@ -76,16 +76,11 @@ export const logout = () => async dispatch => {
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-      return action.user
+      return {...state, user: action.user}
     case REMOVE_USER:
-      return {
-        ...state,
-        allUsers: [
-          ...state.allUsers.filter(user => action.user !== user.userId)
-        ]
-      }
+      return state
     case UPDATE_USER:
-      return
+      return state
     default:
       return state
   }
