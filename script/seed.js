@@ -34,8 +34,7 @@ async function seed() {
       email: 'fgibbs@esgn.com',
       password: '06812',
       firstName: 'Freddie',
-      lastName: 'Gibbs',
-      creditCardNumber: '4786872559155254'
+      lastName: 'Gibbs'
     })
   ])
 
