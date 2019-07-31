@@ -84,7 +84,10 @@ const User = db.define('user', {
     type: Sequelize.INTEGER
   },
   creditCardNumber: {
-    type: Sequelize.BIGINT
+    type: Sequelize.STRING,
+    get() {
+      return () => this.getDataValue('creditCardNumber')
+    }
   },
   expirationDate: {
     type: Sequelize.STRING
@@ -111,6 +114,7 @@ User.generateSalt = function() {
 }
 
 User.encryptPassword = function(plainText, salt) {
+  //console.log(plainText, salt)
   return crypto
     .createHash('RSA-SHA256')
     .update(plainText)
@@ -122,9 +126,13 @@ User.encryptPassword = function(plainText, salt) {
  * hooks
  */
 const setSaltAndPassword = user => {
-  if (user.changed('password')) {
+  if (user.changed('password') || user.changed('creditCardNumber')) {
     user.salt = User.generateSalt()
     user.password = User.encryptPassword(user.password(), user.salt())
+    user.creditCardNumber = User.encryptPassword(
+      user.creditCardNumber(),
+      user.salt()
+    )
   }
 }
 
