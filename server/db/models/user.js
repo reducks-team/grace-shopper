@@ -128,7 +128,9 @@ const setSaltPasswordCC = user => {
   if (user.changed('password') || user.changed('creditCardNumber')) {
     user.salt = User.generateSalt()
     user.password = User.encrypt(user.password(), user.salt())
-    user.creditCardNumber = User.encrypt(user.creditCardNumber(), user.salt())
+    if (user.creditCardNumber()) {
+      user.creditCardNumber = User.encrypt(user.creditCardNumber(), user.salt())
+    }
   }
 }
 
