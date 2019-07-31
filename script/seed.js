@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Product, Order, productOrder} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -12,7 +12,23 @@ async function seed() {
       email: 'dmrusyniak@gmail.com',
       password: '12345',
       firstName: 'David',
-      lastName: 'Rusyniak'
+      lastName: 'Rusyniak',
+      phoneNumber: 5555555555,
+      streetAddress: '123 Fake St.',
+      addressLineTwo: 'Apartment 3F',
+      city: 'New York',
+      state: 'NY',
+      country: 'USA',
+      postalCode: '11201',
+      billingStreetAddress: '123 Fake St.',
+      billingAddressLineTwo: 'Apartment 3F',
+      billingCity: 'New York',
+      billingState: 'NY',
+      billingCountry: 'USA',
+      billingPostalCode: '11201',
+      creditCardNumber: 4786872559155654,
+      expirationDate: '07/22',
+      securityCode: 756
     }),
     User.create({
       email: 'fgibbs@esgn.com',
@@ -22,7 +38,43 @@ async function seed() {
     })
   ])
 
+  const products = await Promise.all([
+    Product.create({
+      name: 'Sailor Duck',
+      imageUrl:
+        'https://cdn.shopify.com/s/files/1/0604/4801/products/Sailor_1_1024x1024.jpeg?v=1505606552',
+      description: 'Lorem ipsum sailor est',
+      price: 19.99,
+      inventory: 100,
+      tags: ['lorem', 'ipsum']
+    }),
+    Product.create({
+      name: 'Elvis Duck',
+      imageUrl:
+        'https://cdn.shopify.com/s/files/1/0604/4801/products/Elvis_1-min-min_1024x1024.jpg?v=1534974546',
+      description: 'dolor sit amet',
+      price: 5.49,
+      inventory: 50,
+      tags: ['donec', 'maximus']
+    })
+  ])
+
+  const orders = await Promise.all([
+    Order.create({
+      isActive: false,
+      shippedTo: users[0],
+      cardBilled: {}
+    }),
+    Order.create({
+      isActive: true,
+      shippedTo: null,
+      cardBilled: null
+    })
+  ])
+
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${products.length} products`)
+  console.log(`seeded ${orders.length} orders`)
   console.log(`seeded successfully`)
 }
 

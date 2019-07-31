@@ -45,7 +45,7 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   phoneNumber: {
-    type: Sequelize.INTEGER
+    type: Sequelize.BIGINT
   },
   streetAddress: {
     type: Sequelize.STRING
@@ -84,10 +84,10 @@ const User = db.define('user', {
     type: Sequelize.INTEGER
   },
   creditCardNumber: {
-    type: Sequelize.INTEGER
+    type: Sequelize.BIGINT
   },
   expirationDate: {
-    type: Sequelize.DATE
+    type: Sequelize.STRING
   },
   securityCode: {
     type: Sequelize.INTEGER
