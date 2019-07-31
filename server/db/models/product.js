@@ -10,8 +10,10 @@ const Product = db.define('products', {
     }
   },
   imageUrl: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false,
+    defaultValue:
+      'https://cdn.shopify.com/s/files/1/0604/4801/products/1.5_Micro_Rubber_Duck_1_burned-2_1024x1024.jpg?v=1514845682',
     validate: {
       notEmpty: true
     }
@@ -24,7 +26,7 @@ const Product = db.define('products', {
     }
   },
   price: {
-    type: Sequelize.FLOAT
+    type: Sequelize.INTEGER
   },
   inventory: {
     type: Sequelize.INTEGER

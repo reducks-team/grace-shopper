@@ -13,9 +13,6 @@ const Order = db.define('orders', {
   cardBilled: {
     type: Sequelize.JSON
   },
-  product: {
-    type: Sequelize.ARRAY(Sequelize.INTEGER)
-  },
   userId: {
     type: Sequelize.INTEGER
   }
