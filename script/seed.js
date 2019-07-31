@@ -26,7 +26,7 @@ async function seed() {
       billingState: 'NY',
       billingCountry: 'USA',
       billingPostalCode: '11201',
-      creditCardNumber: 4786872559155654,
+      creditCardNumber: '4786872559155654',
       expirationDate: '07/22',
       securityCode: 756
     }),
@@ -34,7 +34,8 @@ async function seed() {
       email: 'fgibbs@esgn.com',
       password: '06812',
       firstName: 'Freddie',
-      lastName: 'Gibbs'
+      lastName: 'Gibbs',
+      creditCardNumber: '4786872559155254'
     })
   ])
 
