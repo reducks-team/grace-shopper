@@ -91,7 +91,7 @@ async function seed() {
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${orders.length} orders`)
-  //console.log(`seeded ${productOrders.length} productOrders`)
+  console.log(`seeded ${productOrders.length} productOrders`)
   console.log(`seeded successfully`)
 }
 
