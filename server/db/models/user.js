@@ -113,8 +113,7 @@ User.generateSalt = function() {
   return crypto.randomBytes(16).toString('base64')
 }
 
-User.encryptPassword = function(plainText, salt) {
-  //console.log(plainText, salt)
+User.encrypt = function(plainText, salt) {
   return crypto
     .createHash('RSA-SHA256')
     .update(plainText)
@@ -125,19 +124,16 @@ User.encryptPassword = function(plainText, salt) {
 /**
  * hooks
  */
-const setSaltAndPassword = user => {
+const setSaltPasswordCC = user => {
   if (user.changed('password') || user.changed('creditCardNumber')) {
     user.salt = User.generateSalt()
-    user.password = User.encryptPassword(user.password(), user.salt())
-    user.creditCardNumber = User.encryptPassword(
-      user.creditCardNumber(),
-      user.salt()
-    )
+    user.password = User.encrypt(user.password(), user.salt())
+    user.creditCardNumber = User.encrypt(user.creditCardNumber(), user.salt())
   }
 }
 
-User.beforeCreate(setSaltAndPassword)
-User.beforeUpdate(setSaltAndPassword)
+User.beforeCreate(setSaltPasswordCC)
+User.beforeUpdate(setSaltPasswordCC)
 User.beforeBulkCreate(users => {
-  users.forEach(setSaltAndPassword)
+  users.forEach(setSaltPasswordCC)
 })
