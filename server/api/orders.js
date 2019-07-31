@@ -21,6 +21,8 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+//protect certain routes with a "passport"
+
 router.post('/', async (req, res, next) => {
   try {
     const newOrder = await Order.create(req.body)
@@ -30,6 +32,8 @@ router.post('/', async (req, res, next) => {
     next(error)
   }
 })
+
+//protect certain routes with a "passport"
 
 router.put('/:id', async (req, res, next) => {
   try {
@@ -43,6 +47,8 @@ router.put('/:id', async (req, res, next) => {
     next(error)
   }
 })
+
+//protect certain routes with a "passport"
 
 router.delete('/:id', async (req, res, next) => {
   try {

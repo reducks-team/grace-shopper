@@ -13,14 +13,13 @@ const UPDATE_USER = 'UPDATE_USER'
  * INITIAL STATE
  */
 const defaultUser = {
-  allUsers: [],
   singleUser: {}
 }
 
 /**
  * ACTION CREATORS
  */
-const getAllUsers = user => ({type: GET_USER, user})
+const gotSingleUser = user => ({type: GET_USER, user})
 const removeUser = user => ({type: REMOVE_USER, user})
 const updateUser = user => ({type: UPDATE_USER, user})
 
@@ -31,6 +30,15 @@ export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
+  } catch (err) {
+    console.error(err)
+  }
+}
+// get singe user THUNK
+export const getUser = id => async dispatch => {
+  try {
+    const {user} = await axios.get(`/api/users/:${id}`)
+    dispatch(gotSingleUser(user))
   } catch (err) {
     console.error(err)
   }

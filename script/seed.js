@@ -44,7 +44,7 @@ async function seed() {
       imageUrl:
         'https://cdn.shopify.com/s/files/1/0604/4801/products/Sailor_1_1024x1024.jpeg?v=1505606552',
       description: 'Lorem ipsum sailor est',
-      price: 19.99,
+      price: 1999,
       inventory: 100,
       tags: ['lorem', 'ipsum']
     }),
@@ -53,7 +53,7 @@ async function seed() {
       imageUrl:
         'https://cdn.shopify.com/s/files/1/0604/4801/products/Elvis_1-min-min_1024x1024.jpg?v=1534974546',
       description: 'dolor sit amet',
-      price: 5.49,
+      price: 549,
       inventory: 50,
       tags: ['donec', 'maximus']
     })
