@@ -4,25 +4,19 @@ import history from '../history'
 /**
  * ACTION TYPES
  */
-const GET_ALL_USERS = 'GET_ALL_USERS'
-const GET_USER = 'GET_USER'
-const REMOVE_USER = 'REMOVE_USER'
-const UPDATE_USER = 'UPDATE_USER'
+const GET_PRODUCT = 'GET_PRODUCT'
+const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 
 /**
  * INITIAL STATE
  */
-const defaultUser = {
-  allUsers: [],
-  singleUser: {}
-}
+const defaultUser = {}
 
 /**
  * ACTION CREATORS
  */
-const getAllUsers = user => ({type: GET_USER, user})
-const removeUser = user => ({type: REMOVE_USER, user})
-const updateUser = user => ({type: UPDATE_USER, user})
+const getUser = user => ({type: GET_USER, user})
+const removeUser = () => ({type: REMOVE_USER})
 
 /**
  * THUNK CREATORS
@@ -70,14 +64,7 @@ export default function(state = defaultUser, action) {
     case GET_USER:
       return action.user
     case REMOVE_USER:
-      return {
-        ...state,
-        allUsers: [
-          ...state.allUsers.filter(user => action.user !== user.userId)
-        ]
-      }
-    case UPDATE_USER:
-      return
+      return defaultUser
     default:
       return state
   }
