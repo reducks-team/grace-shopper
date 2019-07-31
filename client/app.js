@@ -1,12 +1,18 @@
 import React from 'react'
 
-import {Navbar} from './components'
 import Routes from './routes'
+import Navbar from './components/navbar'
+import HeroImage from './components/HeroImage'
+// import FeaturedProducts from './components/FeaturedProducts'
+// import Footer from './components/Footer'
 
 const App = () => {
   return (
     <div>
       <Navbar />
+      <HeroImage />
+      {/* <FeaturedProducts />
+      <Footer /> */}
       <Routes />
     </div>
   )

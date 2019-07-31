@@ -1,26 +1,41 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
+// import About from './About'
+// import AllProducts from './AllProducts'
+// import SignIn from './SignIn'
+// import Cart from './Cart'
+// import Account from './Account'
+// import image from '../../images/cart.png'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>BOILERMAKER</h1>
     <nav>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/products">Products</Link>
+          <Link to="/account">Account</Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
+          <Link to="/cart">Cart</Link>
         </div>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/about">About</Link>
+          <Link to="/products">Products</Link>
+          <Link to="/signin">Sign In</Link>
+          <Link to="/cart">Cart</Link>
+          {/* <Route exact path="/about" component={About} />
+          <Route exact path="/products" component={AllProducts} />
+          <Route exact path="/signin" component={SignIn} />
+          <Route exact path="/cart" component={Cart} />
+          <Route exact path="/account" component={Account} /> */}
         </div>
       )}
     </nav>
