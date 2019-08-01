@@ -56,6 +56,12 @@ async function seed() {
       price: 549,
       inventory: 50,
       tags: ['donec', 'maximus']
+    }),
+    Product.create({
+      name: 'Test Duck',
+      description: 'TEST DESCRIPTION',
+      price: 100000,
+      inventory: 1
     })
   ])
 
@@ -79,8 +85,14 @@ async function seed() {
     productOrder.create({
       quantity: 2,
       itemCost: products[0].price,
-      orderId: orders[0].id,
+      orderId: orders[1].id,
       productId: products[0].id
+    }),
+    productOrder.create({
+      quantity: 99,
+      itemCost: products[0].price,
+      orderId: orders[1].id,
+      productId: products[2].id
     }),
     productOrder.create({
       quantity: 5,
