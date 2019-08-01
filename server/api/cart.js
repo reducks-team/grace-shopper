@@ -21,6 +21,7 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
+//This route gets the active cart, checks whether an item exists in the cart or not, and then either creates an entry for it or updates the existing entry as appropriate.  Then it returns the new cart with the appropriate quantities
 router.put('/:userId/:productId/:productCost', async (req, res, next) => {
   try {
     const activeCart = await Order.findByPk(Number(req.params.userId))
@@ -29,18 +30,17 @@ router.put('/:userId/:productId/:productCost', async (req, res, next) => {
       where: {orderId: activeOrderId}
     })
 
-    let tempArr = [...allProductsInCart]
-    let filteredArray = tempArr.filter(
+    let filteredArray = allProductsInCart.filter(
       product =>
         Number(product.dataValues.productId) === Number(req.params.productId)
     )
     if (filteredArray.length) {
-      productOrder.update(
-        {quantity: 1},
+      await productOrder.update(
+        {quantity: Sequelize.literal('quantity + 1')},
         {where: {productId: req.params.productId, orderId: activeOrderId}}
       )
     } else {
-      productOrder.create({
+      await productOrder.create({
         productId: req.params.productId,
         quantity: 1,
         itemCost: req.params.productCost,
@@ -48,10 +48,10 @@ router.put('/:userId/:productId/:productCost', async (req, res, next) => {
       })
     }
 
-    const allProductsInCart2 = await productOrder.findAll({
+    const UpdatedProductsInCart = await productOrder.findAll({
       where: {orderId: activeOrderId}
     })
-    res.send(allProductsInCart2)
+    res.send(UpdatedProductsInCart)
   } catch (error) {
     console.dir(error)
     next(error)
