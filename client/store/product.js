@@ -19,8 +19,8 @@ const defaultProduct = {
 /**
  * ACTION CREATORS
  */
-const gotProduct = product => ({type: GET_PRODUCT, product})
-const gotProducts = products => ({type: GET_PRODUCTS, products})
+const gotProduct = singleProduct => ({type: GET_PRODUCT, singleProduct})
+const gotProducts = allProducts => ({type: GET_PRODUCTS, allProducts})
 //const removeUser = () => ({type: REMOVE_USER})
 
 /**
@@ -29,7 +29,7 @@ const gotProducts = products => ({type: GET_PRODUCTS, products})
 export const getProducts = () => async dispatch => {
   try {
     const res = await axios.get('/api/products')
-    dispatch(gotProducts(res.data || defaultProduct))
+    dispatch(gotProducts(res.data || defaultProduct.allProducts))
   } catch (err) {
     console.error(err)
   }
@@ -38,7 +38,7 @@ export const getProducts = () => async dispatch => {
 export const getProduct = id => async dispatch => {
   try {
     const res = await axios.get(`/api/products/${id}`)
-    dispatch(gotProduct(res.data || defaultProduct))
+    dispatch(gotProduct(res.data || defaultProduct.singleProduct))
   } catch (err) {
     console.error(err)
   }
@@ -50,9 +50,9 @@ export const getProduct = id => async dispatch => {
 export default function(state = defaultProduct, action) {
   switch (action.type) {
     case GET_PRODUCT:
-      return {...state, singleProduct: action.product}
+      return {...state, singleProduct: action.singleProduct}
     case GET_PRODUCTS:
-      return {...state, allProducts: action.products}
+      return {...state, allProducts: action.allProducts}
     default:
       return state
   }
