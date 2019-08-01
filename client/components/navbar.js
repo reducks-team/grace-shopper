@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {logout} from '../store'
+import {auth, getProducts, getProduct} from '../store'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 // import About from './About'
 // import AllProducts from './AllProducts'
@@ -10,7 +10,7 @@ import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 // import Account from './Account'
 // import image from '../../images/cart.png'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({clickProducts, clickProduct, clickSignin, isLoggedIn}) => (
   <div>
     <nav>
       {isLoggedIn ? (
@@ -19,17 +19,22 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/about">About</Link>
           <Link to="/products">Products</Link>
           <Link to="/account">Account</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
+          <a href="#">Logout</a>
           <Link to="/cart">Cart</Link>
         </div>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
           <Link to="/about">About</Link>
-          <Link to="/products">Products</Link>
-          <Link to="/signin">Sign In</Link>
+          <Link to="/products/1" onClick={clickProduct}>
+            Product 1
+          </Link>
+          <Link to="/products" onClick={clickProducts}>
+            Products
+          </Link>
+          <Link to="/signin" onClick={clickSignin}>
+            Sign In
+          </Link>
           <Link to="/cart">Cart</Link>
           {/* <Route exact path="/about" component={About} />
           <Route exact path="/products" component={AllProducts} />
@@ -54,9 +59,13 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    handleClick() {
-      dispatch(logout())
-    }
+    handleClick: () => dispatch(),
+    clickProducts: () => dispatch(getProducts()),
+
+    //clickProduct and clickSignin are hardcoded for now for testing purposes
+    //Eventually they will need to dynamically receive parameters
+    clickProduct: () => dispatch(getProduct(1)),
+    clickSignin: () => dispatch(auth('fgibbs@esgn.com', '06812', 'login'))
   }
 }
 

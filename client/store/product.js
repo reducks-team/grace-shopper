@@ -37,7 +37,7 @@ export const getProducts = () => async dispatch => {
 
 export const getProduct = id => async dispatch => {
   try {
-    const res = await axios.get(`/api/product/${id}`)
+    const res = await axios.get(`/api/products/${id}`)
     dispatch(gotProduct(res.data || defaultProduct))
   } catch (err) {
     console.error(err)
