@@ -21,7 +21,7 @@ const defaultUser = {
  * ACTION CREATORS
  */
 const getUser = singleUser => ({type: GET_USER, singleUser})
-//const removeUser = user => ({type: REMOVE_USER, user})
+const removeUser = user => ({type: REMOVE_USER, user})
 //const updateUser = user => ({type: UPDATE_USER, user})
 
 /**
@@ -70,7 +70,7 @@ export default function(state = defaultUser, action) {
     case GET_USER:
       return {...state, singleUser: action.singleUser}
     case REMOVE_USER:
-      return state
+      return {...state, singleUser: {}}
     case UPDATE_USER:
       return state
     default:

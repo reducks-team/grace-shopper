@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {auth, getProducts, getProduct} from '../store'
+import {auth, getProducts, getProduct, logout} from '../store'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 // import About from './About'
 import AllProducts from './AllProducts'
@@ -10,7 +10,13 @@ import AllProducts from './AllProducts'
 // import Account from './Account'
 // import image from '../../images/cart.png'
 
-const Navbar = ({clickProducts, clickProduct, clickSignin, isLoggedIn}) => (
+const Navbar = ({
+  clickProducts,
+  clickProduct,
+  clickSignin,
+  isLoggedIn,
+  clickLogout
+}) => (
   <div>
     <nav>
       {isLoggedIn ? (
@@ -19,7 +25,10 @@ const Navbar = ({clickProducts, clickProduct, clickSignin, isLoggedIn}) => (
           <Link to="/about">About</Link>
           <Link to="/products">Products</Link>
           <Link to="/account">Account</Link>
-          <a href="#">Logout</a>
+          <Link to="/HomePage" onClick={clickLogout}>
+            Logout
+          </Link>
+          {/* <a href="#">Logout</a> */}
           <Link to="/cart">Cart</Link>
         </div>
       ) : (
@@ -40,7 +49,6 @@ const Navbar = ({clickProducts, clickProduct, clickSignin, isLoggedIn}) => (
         </div>
       )}
     </nav>
-    <hr />
   </div>
 )
 
@@ -49,7 +57,7 @@ const Navbar = ({clickProducts, clickProduct, clickSignin, isLoggedIn}) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.singleUser.id
   }
 }
 
@@ -61,7 +69,8 @@ const mapDispatch = dispatch => {
     //clickProduct and clickSignin are hardcoded for now for testing purposes
     //Eventually they will need to dynamically receive parameters
     clickProduct: () => dispatch(getProduct(1)),
-    clickSignin: () => dispatch(auth('dmrusyniak@gmail.com', '12345', 'login'))
+    clickSignin: () => dispatch(auth('dmrusyniak@gmail.com', '12345', 'login')),
+    clickLogout: () => dispatch(logout())
   }
 }
 
