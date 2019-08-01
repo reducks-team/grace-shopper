@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-//import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getProducts} from '../store'
+import {ProductThumbnail} from './'
 
-class UnconnectedAllProducts extends Component {
+class AllProducts extends Component {
   componentDidMount() {
     this.props.getProducts()
   }
@@ -12,7 +12,9 @@ class UnconnectedAllProducts extends Component {
     return (
       <div>
         {this.props.allProducts.map(product => (
-          <div key={product.id}>{product.name}</div>
+          <div key={product.id}>
+            <ProductThumbnail product={product} />
+          </div>
         ))}
       </div>
     )
@@ -31,6 +33,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  UnconnectedAllProducts
-)
+export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
