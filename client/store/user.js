@@ -9,6 +9,7 @@ const GET_ALL_USERS = 'GET_ALL_USERS'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const UPDATE_USER = 'UPDATE_USER'
+const ADD_TO_CART = 'ADD_TO_CART'
 
 /**
  * INITIAL STATE
@@ -22,6 +23,7 @@ const defaultUser = {
  */
 const getUser = singleUser => ({type: GET_USER, singleUser})
 const removeUser = user => ({type: REMOVE_USER, user})
+const addedToCart = updatedCart => ({type: ADD_TO_CART, updatedCart})
 //const updateUser = user => ({type: UPDATE_USER, user})
 
 /**
@@ -62,6 +64,18 @@ export const logout = () => async dispatch => {
   }
 }
 
+export const addToCart = (userId, productId, productCost) => async dispatch => {
+  try {
+    const updatedCart = await axios.put(
+      `/api/cart/${userId}/${productId}/${productCost}`
+    )
+    dispatch(addedToCart(updatedCart))
+    history.push('/products')
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -71,8 +85,11 @@ export default function(state = defaultUser, action) {
       return {...state, singleUser: action.singleUser}
     case REMOVE_USER:
       return {...state, singleUser: {}}
-    case UPDATE_USER:
-      return state
+    case ADD_TO_CART:
+      return {
+        ...state,
+        singleUser: {...state.singleUser, cart: action.updatedCart}
+      }
     default:
       return state
   }
