@@ -19,7 +19,7 @@ const defaultUser = {
 /**
  * ACTION CREATORS
  */
-const gotSingleUser = singleUser => ({type: GET_USER, singleUser})
+const getUser = singleUser => ({type: GET_USER, singleUser})
 //const removeUser = user => ({type: REMOVE_USER, user})
 //const updateUser = user => ({type: UPDATE_USER, user})
 
@@ -29,13 +29,13 @@ const gotSingleUser = singleUser => ({type: GET_USER, singleUser})
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    dispatch(gotSingleUser(res.data || defaultUser))
+    dispatch(getUser(res.data || defaultUser))
   } catch (err) {
     console.error(err)
   }
 }
-// get single user THUNK
-/* export const getUser = user => async dispatch => {
+// get single user THUNK  ---  UNNECESSARY?
+/* export const getSingleUser = user => async dispatch => {
   try {
     const userData = await axios.get(`/api/users/:${user.id}`)
     dispatch(gotSingleUser(userData))
