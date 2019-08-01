@@ -32,7 +32,9 @@ const Navbar = ({clickProducts, clickProduct, clickSignin, isLoggedIn}) => (
           <Link to="/products" onClick={clickProducts}>
             Products
           </Link>
-          <Link to="/signin">Sign In</Link>
+          <Link to="/signin" onClick={clickSignin}>
+            Sign In
+          </Link>
           <Link to="/cart">Cart</Link>
           {/* <Route exact path="/about" component={About} />
           <Route exact path="/products" component={AllProducts} />
