@@ -29,19 +29,14 @@ const Navbar = ({clickProducts, clickProduct, clickSignin, isLoggedIn}) => (
           <Link to="/products/1" onClick={clickProduct}>
             Product 1
           </Link>
-          <Link to="/products" onClick={clickProducts}>
-            Products
-          </Link>
-          <Link to="/signin" onClick={clickSignin}>
-            Sign In
-          </Link>
+          <Link to="/products">Products</Link>
+          <Link to="/signin">Sign In</Link>
           <Link to="/cart">Cart</Link>
           {/* <Route exact path="/about" component={About} />
           <Route exact path="/products" component={AllProducts} />
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/account" component={Account} /> */}
-          <Route exact path="/products" component={AllProducts} />
         </div>
       )}
     </nav>
@@ -66,7 +61,7 @@ const mapDispatch = dispatch => {
     //clickProduct and clickSignin are hardcoded for now for testing purposes
     //Eventually they will need to dynamically receive parameters
     clickProduct: () => dispatch(getProduct(1)),
-    clickSignin: () => dispatch(auth('fgibbs@esgn.com', '06812', 'login'))
+    clickSignin: () => dispatch(auth('dmrusyniak@gmail.com', '12345', 'login'))
   }
 }
 
