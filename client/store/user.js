@@ -29,7 +29,7 @@ const getUser = singleUser => ({type: GET_USER, singleUser})
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultUser))
+    dispatch(getUser(res.data || defaultUser.singleUser))
   } catch (err) {
     console.error(err)
   }
@@ -76,7 +76,7 @@ export const logout = () => async dispatch => {
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-      return {...state, singleUser: action.user}
+      return {...state, singleUser: action.singleUser}
     case REMOVE_USER:
       return state
     case UPDATE_USER:
