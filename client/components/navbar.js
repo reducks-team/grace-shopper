@@ -29,9 +29,7 @@ const Navbar = ({clickProducts, clickProduct, clickSignin, isLoggedIn}) => (
           <Link to="/products/1" onClick={clickProduct}>
             Product 1
           </Link>
-          <Link to="/products" onClick={clickProducts}>
-            Products
-          </Link>
+          <Link to="/products">Products</Link>
           <Link to="/signin">Sign In</Link>
           <Link to="/cart">Cart</Link>
           {/* <Route exact path="/about" component={About} />
@@ -39,7 +37,6 @@ const Navbar = ({clickProducts, clickProduct, clickSignin, isLoggedIn}) => (
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/account" component={Account} /> */}
-          <Route exact path="/products" component={AllProducts} />
         </div>
       )}
     </nav>
