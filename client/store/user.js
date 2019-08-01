@@ -29,20 +29,20 @@ const gotSingleUser = singleUser => ({type: GET_USER, singleUser})
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultUser))
+    dispatch(gotSingleUser(res.data || defaultUser))
   } catch (err) {
     console.error(err)
   }
 }
 // get single user THUNK
-export const getUser = id => async dispatch => {
+/* export const getUser = user => async dispatch => {
   try {
-    const {user} = await axios.get(`/api/users/:${id}`)
-    dispatch(gotSingleUser(user))
+    const userData = await axios.get(`/api/users/:${user.id}`)
+    dispatch(gotSingleUser(userData))
   } catch (err) {
     console.error(err)
   }
-}
+} */
 
 export const auth = (email, password, method) => async dispatch => {
   let res
