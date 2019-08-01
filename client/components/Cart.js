@@ -2,8 +2,22 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {ProductThumbnail} from './'
 
+const mapStateToProps = state => {
+  return {
+    userId: state.user.singleUser.id
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getActiveProducts: () => dispatch(thunk())
+  }
+}
+
 class Cart extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    console.log(this.props.userId)
+  }
 
   render() {
     return (
@@ -14,10 +28,4 @@ class Cart extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getActiveProducts: () => dispatch(thunk())
-  }
-}
-
-export default connect(null, mapDispatchToProps)(Cart)
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
