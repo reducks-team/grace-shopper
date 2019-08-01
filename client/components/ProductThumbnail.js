@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-export default class UnconnectedAllProducts extends Component {
+export default class ProductThumbnail extends Component {
   render() {
     return (
       <div>

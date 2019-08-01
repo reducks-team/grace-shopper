@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {getProducts} from '../store'
 import {ProductThumbnail} from './'
 
-class UnconnectedAllProducts extends Component {
+class AllProducts extends Component {
   componentDidMount() {
     this.props.getProducts()
   }
@@ -33,6 +33,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  UnconnectedAllProducts
-)
+export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)

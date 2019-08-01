@@ -35,15 +35,6 @@ export const me = () => async dispatch => {
     console.error(err)
   }
 }
-// get single user THUNK  ---  UNNECESSARY?
-/* export const getSingleUser = user => async dispatch => {
-  try {
-    const userData = await axios.get(`/api/users/:${user.id}`)
-    dispatch(gotSingleUser(userData))
-  } catch (err) {
-    console.error(err)
-  }
-} */
 
 export const auth = (email, password, method) => async dispatch => {
   let res
