@@ -1,38 +1,36 @@
-// import React, {Component} from 'react'
-// import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
-// import {connect} from 'react-redux'
-// //import {getAllProducts} from '../productReducer'
+import React, {Component} from 'react'
+//import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {getProducts} from '../store'
 
-// export class AllStudents extends Component {
-//   componentDidMount() {
-//     this.props.getAllProducts()
-//   }
+export class UnconnectedAllProducts extends Component {
+  componentDidMount() {
+    this.props.getProducts()
+  }
 
-//   render() {
-//     return (
-//       <div className="allProducts">
-//         <h3>Products</h3>
+  render() {
+    return (
+      <div>
+        {this.props.allProducts.map(product => (
+          <div key={product.id}>{product.name}</div>
+        ))}
+      </div>
+    )
+  }
+}
 
-//         {this.props.AllProducts.map(product => (
-//           <div className="product.id" key={product.id}>
-//             <Link to={`/products/${product.id}`}>{product.name}</Link>
-//           </div>
-//         ))}
-//       </div>
-//     )
-//   }
-// }
+const mapStateToProps = state => {
+  return {
+    allProducts: state.product.allProducts
+  }
+}
 
-// const mapStateToProps = state => {
-//   return {
-//     AllProducts: state.products.allProducts
-//   }
-// }
+const mapDispatchToProps = dispatch => {
+  return {
+    getProducts: () => dispatch(getProducts())
+  }
+}
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     getAllProducts: () => dispatch(getAllProducts())
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  UnconnectedAllProducts
+)

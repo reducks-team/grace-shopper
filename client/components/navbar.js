@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {auth, getProducts, getProduct} from '../store'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 // import About from './About'
-// import AllProducts from './AllProducts'
+import AllProducts from './AllProducts'
 // import SignIn from './SignIn'
 // import Cart from './Cart'
 // import Account from './Account'
@@ -41,6 +41,7 @@ const Navbar = ({clickProducts, clickProduct, clickSignin, isLoggedIn}) => (
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/account" component={Account} /> */}
+          <Route exact path="/products" component={AllProducts} />
         </div>
       )}
     </nav>
