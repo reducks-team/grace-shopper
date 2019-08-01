@@ -5,7 +5,8 @@
  */
 export {default as Navbar} from './navbar'
 export {About} from './About'
-export {AllProducts} from './AllProducts'
+export {default as AllProducts} from './AllProducts'
+export {SingleProduct} from './SingleProduct'
 export {SignIn} from './SignIn'
 export {Cart} from './Cart'
 export {Account} from './Account'
