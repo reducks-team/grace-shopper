@@ -12,9 +12,8 @@ const App = () => {
     <div>
       <Navbar />
 
-      {/* <FeaturedProducts /> */}
-      <Footer />
       <Routes />
+      <Footer />
     </div>
   )
 }
