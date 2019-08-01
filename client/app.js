@@ -11,7 +11,7 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <UserHome />
+
       {/* <FeaturedProducts /> */}
       <Footer />
       <Routes />
