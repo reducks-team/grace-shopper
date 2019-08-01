@@ -6,7 +6,7 @@
 export {default as Navbar} from './navbar'
 export {About} from './About'
 export {AllProducts} from './AllProducts'
-export {SignIn} from './SignIn'
+export {default as SignIn} from './SignIn'
 export {Cart} from './Cart'
 export {Account} from './Account'
 export {UserHome} from './user-home'
