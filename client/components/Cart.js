@@ -1,9 +1,14 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {ProductThumbnail} from './'
+import {getCart} from '../store'
 
 class Cart extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.getActiveCart(Number(this.props.userId))
+    console.log('userId: ', this.props.userId)
+    console.log('activeCart: ', this.props.activeCart)
+  }
 
   render() {
     return (
@@ -14,10 +19,17 @@ class Cart extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    getActiveProducts: () => dispatch(thunk())
+    userId: state.user.singleUser.id,
+    activeCart: state.user.singleUser.cart
   }
 }
 
-export default connect(null, mapDispatchToProps)(Cart)
+const mapDispatchToProps = dispatch => {
+  return {
+    getActiveCart: () => dispatch(getCart())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
