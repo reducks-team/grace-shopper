@@ -19,7 +19,7 @@ const defaultUser = {
 /**
  * ACTION CREATORS
  */
-const gotSingleUser = singleUser => ({type: GET_USER, singleUser})
+const getUser = singleUser => ({type: GET_USER, singleUser})
 //const removeUser = user => ({type: REMOVE_USER, user})
 //const updateUser = user => ({type: UPDATE_USER, user})
 
@@ -29,20 +29,20 @@ const gotSingleUser = singleUser => ({type: GET_USER, singleUser})
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultUser))
+    dispatch(getUser(res.data || defaultUser.singleUser))
   } catch (err) {
     console.error(err)
   }
 }
-// get single user THUNK
-export const getUser = id => async dispatch => {
+// get single user THUNK  ---  UNNECESSARY?
+/* export const getSingleUser = user => async dispatch => {
   try {
-    const {user} = await axios.get(`/api/users/:${id}`)
-    dispatch(gotSingleUser(user))
+    const userData = await axios.get(`/api/users/:${user.id}`)
+    dispatch(gotSingleUser(userData))
   } catch (err) {
     console.error(err)
   }
-}
+} */
 
 export const auth = (email, password, method) => async dispatch => {
   let res
@@ -76,7 +76,7 @@ export const logout = () => async dispatch => {
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-      return {...state, singleUser: action.user}
+      return {...state, singleUser: action.singleUser}
     case REMOVE_USER:
       return state
     case UPDATE_USER:
