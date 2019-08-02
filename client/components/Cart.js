@@ -4,12 +4,7 @@ import {getCart} from '../store'
 
 class Cart extends Component {
   componentDidMount() {
-    this.props.getActiveCart(this.props.singleUser.id)
-  }
-
-  //This seems to be working as a sort of hacky solution to the cart items not rendering if you refresh the cart page --- LUKE
-  componentDidUpdate(prevProps) {
-    if (prevProps.singleUser.id !== this.props.singleUser.id) {
+    if (this.props.singleUser.id) {
       this.props.getActiveCart(this.props.singleUser.id)
     }
   }
