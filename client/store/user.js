@@ -25,7 +25,7 @@ const defaultUser = {
 const getUser = singleUser => ({type: GET_USER, singleUser})
 const removeUser = user => ({type: REMOVE_USER, user})
 const addedToCart = updatedCart => ({type: ADD_TO_CART, updatedCart})
-const gotCart = activeCart => ({type: ADD_TO_CART, activeCart})
+const gotCart = activeCart => ({type: GET_CART, activeCart})
 //const updateUser = user => ({type: UPDATE_USER, user})
 
 /**
@@ -98,10 +98,7 @@ export default function(state = defaultUser, action) {
     case REMOVE_USER:
       return {...state, singleUser: {}}
     case ADD_TO_CART:
-      return {
-        ...state,
-        singleUser: {...state.singleUser, cart: action.updatedCart}
-      }
+      return {...state}
     case GET_CART:
       return {
         ...state,

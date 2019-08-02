@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Order, productOrder} = require('../db/models')
+const {Order, Product, productOrder} = require('../db/models')
 const Sequelize = require('sequelize')
 module.exports = router
 
@@ -7,12 +7,13 @@ module.exports = router
 router.get('/:userId', async (req, res, next) => {
   try {
     const activeCart = await Order.findOne({
-      where: {id: Number(req.params.userId), isActive: true},
+      where: {userId: Number(req.params.userId), isActive: true},
       attributes: ['id']
     })
     const activeOrderId = activeCart.id
     const allProductsInCart = await productOrder.findAll({
-      where: {orderId: activeOrderId}
+      where: {orderId: activeOrderId},
+      include: [{model: Product}]
     })
     res.send(allProductsInCart)
   } catch (error) {
@@ -24,10 +25,14 @@ router.get('/:userId', async (req, res, next) => {
 //This route gets the active cart, checks whether an item exists in the cart or not, and then either creates an entry for it or updates the existing entry as appropriate.  Then it returns the new cart with the appropriate quantities
 router.put('/:userId/:productId/:productCost', async (req, res, next) => {
   try {
-    const activeCart = await Order.findByPk(Number(req.params.userId))
+    const activeCart = await Order.findOne({
+      where: {userId: Number(req.params.userId), isActive: true},
+      attributes: ['id']
+    })
     const activeOrderId = activeCart.id
     const allProductsInCart = await productOrder.findAll({
-      where: {orderId: activeOrderId}
+      where: {orderId: activeOrderId},
+      include: [{model: Product}]
     })
 
     let filteredArray = allProductsInCart.filter(
