@@ -5,15 +5,15 @@ import {getCart} from '../store'
 
 class Cart extends Component {
   componentDidMount() {
-    this.props.getActiveCart(Number(this.props.userId))
-    console.log('userId: ', this.props.userId)
-    console.log('activeCart: ', this.props.activeCart)
+    this.props.getActiveCart(this.props.singleUser.id)
   }
 
   render() {
+    console.log(this.props.activeCart.data)
     return (
       <div>
         <h1>Your Cart</h1>
+        {this.props.activeCart.data.map(product => product.productId)}
       </div>
     )
   }
@@ -21,14 +21,14 @@ class Cart extends Component {
 
 const mapStateToProps = state => {
   return {
-    userId: state.user.singleUser.id,
-    activeCart: state.user.singleUser.cart
+    singleUser: state.user.singleUser,
+    activeCart: state.user.singleUser.cart || {data: []}
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getActiveCart: () => dispatch(getCart())
+    getActiveCart: userId => dispatch(getCart(userId))
   }
 }
 

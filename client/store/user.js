@@ -25,7 +25,7 @@ const defaultUser = {
 const getUser = singleUser => ({type: GET_USER, singleUser})
 const removeUser = user => ({type: REMOVE_USER, user})
 const addedToCart = updatedCart => ({type: ADD_TO_CART, updatedCart})
-const gotCart = activeCart => ({type: ADD_TO_CART, activeCart})
+const gotCart = activeCart => ({type: GET_CART, activeCart})
 //const updateUser = user => ({type: UPDATE_USER, user})
 
 /**
