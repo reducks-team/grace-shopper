@@ -9,6 +9,12 @@ class Cart extends Component {
     }
   }
 
+  componentDidUpdate() {
+    /* if (!this.props.activeCart) {
+      this.props.getActiveCart(this.props.singleUser.id)
+    } */
+  }
+
   render() {
     return (
       <div>
