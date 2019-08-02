@@ -51,7 +51,7 @@ class SignIn extends Component {
           <div>
             <label> Password </label>
             <input
-              type="number"
+              type="password"
               name="password"
               value={this.state.campusId}
               onChange={this.handlePasswordChange}

@@ -68,8 +68,7 @@ const mapDispatch = dispatch => {
 
     //clickProduct and clickSignin are hardcoded for now for testing purposes
     //Eventually they will need to dynamically receive parameters
-    clickProduct: () => dispatch(getProduct(1)),
-    clickSignin: () => dispatch(auth('dmrusyniak@gmail.com', '12345', 'login')),
+    //
     clickLogout: () => dispatch(logout())
   }
 }
