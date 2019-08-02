@@ -21,7 +21,6 @@ const Navbar = ({
     <nav>
       {isLoggedIn ? (
         <div>
-          {/* The navbar will show these links after you log in */}
           <Link to="/about">About</Link>
           <Link to="/products">Products</Link>
           <Link to="/account">Account</Link>
@@ -34,10 +33,8 @@ const Navbar = ({
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
+          <Link to="/Home">About</Link>
           <Link to="/about">About</Link>
-          <Link to="/products/1" onClick={clickProduct}>
-            Product 1
-          </Link>
           <Link to="/products">Products</Link>
           <Link to="/signin">Sign In</Link>
           <Link to="/cart">Cart</Link>
