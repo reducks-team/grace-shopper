@@ -6,7 +6,6 @@ import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import Routes from './routes'
 import Navbar from './components/navbar'
 import Navbar2 from './components/NavBar2'
-
 import {UserHome} from './components/user-home'
 import Footer from './components/Footer'
 // import FeaturedProducts from './components/FeaturedProducts'

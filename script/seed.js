@@ -60,7 +60,7 @@ async function seed() {
     Product.create({
       name: 'Test Duck',
       description: 'TEST DESCRIPTION',
-      price: 100000,
+      price: 69,
       inventory: 1
     })
   ])
@@ -70,7 +70,6 @@ async function seed() {
       isActive: false,
       shippedTo: users[0],
       cardBilled: {},
-      product: [products[0].id, products[1].id],
       userId: users[0].id
     }),
     Order.create({
@@ -78,6 +77,12 @@ async function seed() {
       shippedTo: null,
       cardBilled: null,
       userId: users[1].id
+    }),
+    Order.create({
+      isActive: true,
+      shippedTo: null,
+      cardBilled: null,
+      userId: users[0].id
     })
   ])
 
@@ -90,7 +95,7 @@ async function seed() {
     }),
     productOrder.create({
       quantity: 99,
-      itemCost: products[0].price,
+      itemCost: products[2].price,
       orderId: orders[1].id,
       productId: products[2].id
     }),
@@ -98,6 +103,12 @@ async function seed() {
       quantity: 5,
       itemCost: products[1].price,
       orderId: orders[0].id,
+      productId: products[1].id
+    }),
+    productOrder.create({
+      quantity: 75,
+      itemCost: products[1].price,
+      orderId: orders[2].id,
       productId: products[1].id
     })
   ])
