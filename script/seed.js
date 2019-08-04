@@ -60,8 +60,65 @@ async function seed() {
     Product.create({
       name: 'Test Duck',
       description: 'TEST DESCRIPTION',
+      imageUrl:
+        'https://cdn.shopify.com/s/files/1/0604/4801/products/Elvis_1-min-min_1024x1024.jpg?v=1534974546',
       price: 69,
-      inventory: 1
+      inventory: 15,
+      tags: ['donec', 'maximus']
+    }),
+    Product.create({
+      name: 'Sailor Duck',
+      imageUrl:
+        'https://cdn.shopify.com/s/files/1/0604/4801/products/Sailor_1_1024x1024.jpeg?v=1505606552',
+      description: 'Lorem ipsum sailor est',
+      price: 999,
+      inventory: 200,
+      tags: ['lorem', 'ipsum']
+    }),
+    Product.create({
+      name: 'Elvis Duck',
+      imageUrl:
+        'https://cdn.shopify.com/s/files/1/0604/4801/products/Elvis_1-min-min_1024x1024.jpg?v=1534974546',
+      description: 'dolor sit amet',
+      price: 749,
+      inventory: 150,
+      tags: ['donec', 'maximus']
+    }),
+    Product.create({
+      name: 'Test Duck',
+      description: 'TEST DESCRIPTION',
+      imageUrl:
+        'https://cdn.shopify.com/s/files/1/0604/4801/products/Elvis_1-min-min_1024x1024.jpg?v=1534974546',
+      price: 699,
+      inventory: 1,
+      tags: ['donec', 'maximus']
+    }),
+    Product.create({
+      name: 'Sailor Duck',
+      imageUrl:
+        'https://cdn.shopify.com/s/files/1/0604/4801/products/Sailor_1_1024x1024.jpeg?v=1505606552',
+      description: 'Lorem ipsum sailor est',
+      price: 849,
+      inventory: 150,
+      tags: ['lorem', 'ipsum']
+    }),
+    Product.create({
+      name: 'Elvis Duck',
+      imageUrl:
+        'https://cdn.shopify.com/s/files/1/0604/4801/products/Elvis_1-min-min_1024x1024.jpg?v=1534974546',
+      description: 'dolor sit amet',
+      price: 849,
+      inventory: 50,
+      tags: ['donec', 'maximus']
+    }),
+    Product.create({
+      name: 'Test Duck',
+      imageUrl:
+        'https://cdn.shopify.com/s/files/1/0604/4801/products/Elvis_1-min-min_1024x1024.jpg?v=1534974546',
+      description: 'TEST DESCRIPTION',
+      price: 679,
+      inventory: 140,
+      tags: ['donec', 'maximus']
     })
   ])
 
