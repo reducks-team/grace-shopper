@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getCart} from '../store'
+import {getCart, checkout} from '../store'
 import {CartRow} from '.'
+import Button from '@material-ui/core/Button'
 
 class Cart extends Component {
   componentDidMount() {
     if (this.props.singleUser.id) {
       this.props.getActiveCart(this.props.singleUser.id)
+      console.log(this.props.singleUser)
     }
   }
 
@@ -14,6 +16,12 @@ class Cart extends Component {
     if (!this.props.activeCart.data.length) {
       this.props.getActiveCart(this.props.singleUser.id)
     }
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+
+    this.props.checkout(this.props.singleUser.id)
   }
 
   render() {
@@ -28,6 +36,14 @@ class Cart extends Component {
             cart={this.props.activeCart}
           />
         ))}
+        <Button
+          onClick={this.handleSubmit}
+          fullWidth
+          variant="contained"
+          color="primary"
+        >
+          Checkout
+        </Button>
       </div>
     )
   }
@@ -42,7 +58,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getActiveCart: userId => dispatch(getCart(userId))
+    getActiveCart: userId => dispatch(getCart(userId)),
+    checkout: userId => dispatch(checkout(userId))
   }
 }
 

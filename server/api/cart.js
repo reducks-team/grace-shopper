@@ -64,9 +64,10 @@ router.put('/:userId/:productId/:productCost', async (req, res, next) => {
 })
 
 //This route creates a new active order
-router.post('/:userId', async (req, res, next) => {
+router.post('/new/:userId', async (req, res, next) => {
   try {
-    const newCart = await Order.create(req.body)
+    console.log(req.body)
+    const newCart = await Order.create({userId: req.params.userId})
     res.send(newCart)
   } catch (error) {
     console.dir(error)
