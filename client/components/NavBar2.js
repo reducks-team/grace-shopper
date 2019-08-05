@@ -46,19 +46,7 @@ const Navbar2 = ({isLoggedIn, clickLogout}) => (
         <ListItem component="div">
           <ListItemText inset>
             <TypoGraphy color="inherit" variant="title">
-              <Link to="/HomePage">Home</Link>
-            </TypoGraphy>
-          </ListItemText>
-
-          <ListItemText inset>
-            <TypoGraphy color="inherit" variant="title">
               <Link to="/products">Products</Link>
-            </TypoGraphy>
-          </ListItemText>
-
-          <ListItemText inset>
-            <TypoGraphy color="inherit" variant="title">
-              <Link to="/about">About</Link>
             </TypoGraphy>
           </ListItemText>
 
@@ -71,6 +59,12 @@ const Navbar2 = ({isLoggedIn, clickLogout}) => (
           <ListItemText inset>
             <TypoGraphy color="inherit" variant="title">
               <Link to="/signin">Sign In</Link>
+            </TypoGraphy>
+          </ListItemText>
+
+          <ListItemText inset>
+            <TypoGraphy color="inherit" variant="title">
+              <Link to="/signup">Sign Up</Link>
             </TypoGraphy>
           </ListItemText>
         </ListItem>

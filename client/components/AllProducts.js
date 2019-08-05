@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import {Grid, Paper, Typography} from '@material-ui/core'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
@@ -21,30 +22,34 @@ class AllProducts extends Component {
         <Grid container spacing={2} justify="center">
           {this.props.allProducts.map(product => (
             <Grid item key={product.id} xs={4}>
-              <Card>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    alt={product.name}
-                    height="140"
-                    title={product.name}
-                    image={product.imageUrl}
-                  />
-                  {/* <ProductThumbnail product={product} /> */}
+              <Link to={`/products/${product.id}`}>
+                <Card>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      alt={product.name}
+                      height="140"
+                      title={product.name}
+                      image={product.imageUrl}
+                    />
+                    {/* <ProductThumbnail product={product} /> */}
 
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {product.name}
-                    </Typography>
-                    <Typography component="p">{product.description}</Typography>
-                  </CardContent>
-                </CardActionArea>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    Add to Cart
-                  </Button>
-                </CardActions>
-              </Card>
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {product.name}
+                      </Typography>
+                      <Typography component="p">
+                        {product.description}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions>
+                    <Button size="small" color="primary">
+                      Add to Cart
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Link>
             </Grid>
           ))}
         </Grid>

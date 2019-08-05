@@ -10,11 +10,36 @@ import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
-import {makeStyles} from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {connect} from 'react-redux'
 import {auth} from '../store'
+import {withStyles} from '@material-ui/core/styles'
+
+const styles = theme => ({
+  '@global': {
+    body: {
+      backgroundColor: theme.palette.common.white
+    }
+  },
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2)
+  }
+})
 
 class SignIn extends Component {
   constructor(props) {
@@ -41,7 +66,6 @@ class SignIn extends Component {
   componentDidMount() {}
 
   handleSubmit = event => {
-    console.log(this.props)
     event.preventDefault()
     const email = event.target.email.value
     const password = event.target.password.value
@@ -49,30 +73,66 @@ class SignIn extends Component {
   }
 
   render() {
+    const {classes} = this.props
     return (
       <div>
-        <h1>Sign In</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <label> Email </label>
-            <input
-              type="text"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleEmailChange}
-            />
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <form className={classes.form} onSubmit={this.handleSubmit}>
+              <TextField
+                type="text"
+                name="email"
+                onChange={this.handleEmailChange}
+                value={this.state.email}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                type="password"
+                name="password"
+                onChange={this.handlePasswordChange}
+                value={this.state.password}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                label="Password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item xs />
+                <Grid item>
+                  <Link href="#" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
+              </Grid>
+            </form>
           </div>
-          <div>
-            <label> Password </label>
-            <input
-              type="number"
-              name="password"
-              value={this.state.campusId}
-              onChange={this.handlePasswordChange}
-            />
-          </div>
-          <button>Submit</button>
-        </form>
+        </Container>
       </div>
     )
   }
@@ -92,4 +152,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(SignIn)
+)

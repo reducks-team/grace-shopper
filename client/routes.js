@@ -6,6 +6,7 @@ import {
   About,
   AllProducts,
   SignIn,
+  SignUp,
   Cart,
   Account,
   SingleProduct,
@@ -32,6 +33,7 @@ class Routes extends Component {
         <Route exact path="/about" component={About} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/signin" component={SignIn} />
+        <Route exact path="/signup" component={SignUp} />
         <Route exact path="/cart" component={Cart} />
         <Route
           exact

@@ -16,7 +16,7 @@ const App = () => {
       <AppBar color="primary" position="static">
         <Toolbar>
           <TypoGraphy variant="title" color="inherit">
-            <Link to="/HomePage">
+            <Link to="/home">
               <h1> REDUCKS </h1>
             </Link>
           </TypoGraphy>
