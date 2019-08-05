@@ -11,6 +11,7 @@ const REMOVE_USER = 'REMOVE_USER'
 const UPDATE_USER = 'UPDATE_USER'
 const ADD_TO_CART = 'ADD_TO_CART'
 const GET_CART = 'GET_CART'
+const CLEAR_USER = 'CLEAR_USER'
 
 /**
  * INITIAL STATE
@@ -26,6 +27,7 @@ const getUser = singleUser => ({type: GET_USER, singleUser})
 const removeUser = user => ({type: REMOVE_USER, user})
 const addedToCart = updatedCart => ({type: ADD_TO_CART, updatedCart})
 const gotCart = activeCart => ({type: GET_CART, activeCart})
+const clearedUser = () => ({type: CLEAR_USER})
 //const updateUser = user => ({type: UPDATE_USER, user})
 
 /**
@@ -54,6 +56,11 @@ export const auth = (email, password, method) => async dispatch => {
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
+}
+
+//This clearUser thunk exists to clear the singleUser.error field that pops up when you enter an incorrect username and password
+export const clearUser = () => async dispatch => {
+  dispatch(clearedUser())
 }
 
 export const logout = () => async dispatch => {
@@ -104,6 +111,8 @@ export default function(state = defaultUser, action) {
         ...state,
         singleUser: {...state.singleUser, cart: action.activeCart}
       }
+    case CLEAR_USER:
+      return {...state, singleUser: {}}
     default:
       return state
   }

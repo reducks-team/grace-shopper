@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {connect} from 'react-redux'
-import {auth} from '../store'
+import {auth, clearUser} from '../store'
 import {withStyles} from '@material-ui/core/styles'
 
 const styles = theme => ({
@@ -65,9 +65,11 @@ class SignIn extends Component {
 
   componentDidMount() {}
 
-  componentDidUpdate() {
+  //This method alerts the user that they have an incorrect field, and then clears the singleUser:{error: authError} so that the alert does not display every single time the react component updates
+  componentDidUpdate(prevProps) {
     if (this.props.singleUser.error) {
       alert('Incorrect username and/or password')
+      this.props.clearUser()
     }
   }
 
@@ -154,6 +156,9 @@ const mapDispatchToProps = dispatch => {
   return {
     signInUser: (email, password, method = 'login') => {
       dispatch(auth(email, password, method))
+    },
+    clearUser: () => {
+      dispatch(clearUser())
     }
   }
 }
