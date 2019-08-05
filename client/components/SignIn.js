@@ -65,6 +65,12 @@ class SignIn extends Component {
 
   componentDidMount() {}
 
+  componentDidUpdate() {
+    if (this.props.singleUser.error) {
+      alert('Incorrect username and/or password')
+    }
+  }
+
   handleSubmit = event => {
     event.preventDefault()
     const email = event.target.email.value
