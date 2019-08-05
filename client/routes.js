@@ -29,13 +29,13 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={UserHome} />
-        <Route path="/home" component={UserHome} />
-        <Route path="/about" component={About} />
-        <Route path="/products" component={AllProducts} />
-        <Route path="/signin" component={SignIn} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/cart" component={Cart} />
-        {/* <Route path="/login" component={Login} /> */}
+        <Route exact path="/home" component={UserHome} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/products" component={AllProducts} />
+        <Route exact path="/signin" component={SignIn} />
+        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/HomePage" component={UserHome} />
         <Route
           exact
           path="/products/:productId([0-9]+)"

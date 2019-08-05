@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getCart} from '../store'
+import {CartRow} from '.'
 
 class Cart extends Component {
   componentDidMount() {
@@ -19,7 +20,14 @@ class Cart extends Component {
     return (
       <div>
         <h1>Your Cart</h1>
-        {this.props.activeCart.data.map(product => product.product.name)}
+        <CartRow singleUser={this.props.singleUser} />
+        {this.props.activeCart.data.map(product => (
+          <CartRow
+            key={product.product.id}
+            product={product.product}
+            cart={this.props.activeCart}
+          />
+        ))}
       </div>
     )
   }

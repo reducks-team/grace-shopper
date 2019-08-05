@@ -19,3 +19,17 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.cart-row {
+  width: 45%;
+  background-color: white;
+  font-family: arial;
+  margin-left: 30px;
+  height: 80%;
+  padding: 10px 15px 15px 15px;
+  border-radius: 10px;
+  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
