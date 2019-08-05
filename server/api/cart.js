@@ -62,3 +62,28 @@ router.put('/:userId/:productId/:productCost', async (req, res, next) => {
     next(error)
   }
 })
+
+//This route creates a new active order
+router.post('/:userId', async (req, res, next) => {
+  try {
+    const newCart = await Order.create(req.body)
+    res.send(newCart)
+  } catch (error) {
+    console.dir(error)
+    next(error)
+  }
+})
+
+//This route flips the current active cart to a historical order
+router.put('/checkout/:userId', async (req, res, next) => {
+  try {
+    const updatedCart = await Order.update(
+      {isActive: false},
+      {where: {userId: req.params.userId, isActive: true}}
+    )
+    res.send(updatedCart)
+  } catch (error) {
+    console.dir(error)
+    next(error)
+  }
+})
