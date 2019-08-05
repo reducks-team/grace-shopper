@@ -6,11 +6,11 @@ import {
   About,
   AllProducts,
   SignIn,
-  SignUp,
   Cart,
   Account,
   SingleProduct,
-  UserHome
+  UserHome,
+  SignUp
 } from './components'
 import {me} from './store'
 

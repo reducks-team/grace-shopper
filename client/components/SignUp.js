@@ -67,7 +67,7 @@ class SignUp extends Component {
       expirationDateYear: '',
       securityCode: ''
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
+    // this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(event) {
@@ -78,58 +78,8 @@ class SignUp extends Component {
 
   componentDidMount() {}
 
-  handleSubmit = event => {
-    console.log(this.props)
-    event.preventDefault()
-    const email = event.target.email.value
-    const password = event.target.password.value
-    const firstName = event.target.firstName.value
-    const lastName = event.target.lastName.value
-    const phoneNumber = event.target.phoneNumber.value
-    const streetAddress = event.target.streetAddress.value
-    const addresslineTwo = event.target.addresslineTwo.value
-    const city = event.target.city.value
-    const state = event.target.state.value
-    const country = event.target.country.value
-    const postalCode = event.target.postalCode.value
-    const billingStreetAddress = event.target.billingStreetAddress.value
-    const billingAddressLineTwo = event.target.billingAddressLineTwo.value
-    const billingCity = event.target.billingCity.value
-    const billingState = event.target.billingState.value
-    const billingCountry = event.target.billingCountry.value
-    const billingPostalCode = event.target.billingPostalCode.value
-    const creditCardNumber = event.target.creditCardNumber.value
-    const expirationDateMonth = event.target.expirationDateMonth.value
-    const expirationDateYear = event.target.expirationDateYear.value
-    const securityCode = event.target.securityCode.value
-
-    this.props.signUpUser(
-      email,
-      password,
-      firstName,
-      lastName,
-      phoneNumber,
-      streetAddress,
-      addresslineTwo,
-      city,
-      state,
-      country,
-      postalCode,
-      billingStreetAddress,
-      billingAddressLineTwo,
-      billingCity,
-      billingState,
-      billingCountry,
-      billingPostalCode,
-      creditCardNumber,
-      expirationDateMonth,
-      expirationDateMonth,
-      securityCode
-    )
-  }
-
   render() {
-    const {classes} = this.props
+    const {classes, handleSubmit} = this.props
     return (
       <div>
         <Container component="main" maxWidth="xs">
@@ -141,7 +91,10 @@ class SignUp extends Component {
             <Typography component="h1" variant="h5">
               Create a New Account
             </Typography>
-            <form className={classes.form} onSubmit={this.handleSubmit}>
+            <form
+              className={classes.form}
+              onSubmit={() => handleSubmit(this.state)}
+            >
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -151,7 +104,9 @@ class SignUp extends Component {
                     label="First Name"
                     autoComplete="fname"
                     value={this.state.firstName}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({firstName: event.target.value})
+                    }
                     variant="outlined"
                     required
                     fullWidth
@@ -165,7 +120,9 @@ class SignUp extends Component {
                     id="lastName"
                     label="Last Name"
                     value={this.state.lastName}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({lastName: event.target.value})
+                    }
                     autoComplete="lname"
                     variant="outlined"
                     required
@@ -179,7 +136,9 @@ class SignUp extends Component {
                     id="email"
                     label="Email Address"
                     value={this.state.email}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({email: event.target.value})
+                    }
                     variant="outlined"
                     required
                     fullWidth
@@ -192,7 +151,9 @@ class SignUp extends Component {
                     id="password"
                     label="Password"
                     value={this.state.password}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({password: event.target.value})
+                    }
                     variant="outlined"
                     required
                     fullWidth
@@ -205,7 +166,9 @@ class SignUp extends Component {
                     id="phoneNumber"
                     label="Phone Number"
                     value={this.state.phoneNumber}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({phoneNumber: event.target.value})
+                    }
                     variant="outlined"
                     required
                     fullWidth
@@ -218,7 +181,9 @@ class SignUp extends Component {
                     id="streetAddress"
                     label="Street Address"
                     value={this.state.streetAddress}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({streetAddress: event.target.value})
+                    }
                     variant="outlined"
                     required
                     fullWidth
@@ -231,7 +196,9 @@ class SignUp extends Component {
                     id="addressLineTwo"
                     label="Address Line Two"
                     value={this.state.addressLineTwo}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({addressLineTwo: event.target.value})
+                    }
                     variant="outlined"
                     fullWidth
                   />
@@ -243,7 +210,9 @@ class SignUp extends Component {
                     id="city"
                     label="City"
                     value={this.state.city}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({city: event.target.value})
+                    }
                     variant="outlined"
                     required
                     fullWidth
@@ -256,7 +225,9 @@ class SignUp extends Component {
                     id="state"
                     label="State"
                     value={this.state.state}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({state: event.target.value})
+                    }
                     variant="outlined"
                     required
                     fullWidth
@@ -269,7 +240,9 @@ class SignUp extends Component {
                     id="country"
                     label="Country"
                     value={this.state.country}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({country: event.target.value})
+                    }
                     variant="outlined"
                     required
                     fullWidth
@@ -282,7 +255,9 @@ class SignUp extends Component {
                     id="postalCode"
                     label="Postal Code"
                     value={this.state.postalCode}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({postalCode: event.target.value})
+                    }
                     variant="outlined"
                     required
                     fullWidth
@@ -295,7 +270,9 @@ class SignUp extends Component {
                     id="billingStreetAddress"
                     label="Billing Street Address"
                     value={this.state.billingStreetAddress}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({billingStreetAddress: event.target.value})
+                    }
                     variant="outlined"
                     required
                     fullWidth
@@ -308,9 +285,10 @@ class SignUp extends Component {
                     id="billingAddressLineTwo"
                     label="Billing Address LineTwo"
                     value={this.state.billingAddressLineTwo}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({billingAddressLineTwo: event.target.value})
+                    }
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -321,9 +299,10 @@ class SignUp extends Component {
                     id="billingCity"
                     label="Billing City"
                     value={this.state.billingCity}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({billingCity: event.target.value})
+                    }
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -334,9 +313,10 @@ class SignUp extends Component {
                     id="billingState"
                     label="Billing State"
                     value={this.state.billingState}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({billingState: event.target.value})
+                    }
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -347,9 +327,10 @@ class SignUp extends Component {
                     id="billingCountry"
                     label="Billing Country"
                     value={this.state.billingCountry}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({billingCountry: event.target.value})
+                    }
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -360,9 +341,10 @@ class SignUp extends Component {
                     id="billingPostalCode"
                     label="billingPostalCode"
                     value={this.state.billingPostalCode}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({billingPostalCode: event.target.value})
+                    }
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -373,9 +355,10 @@ class SignUp extends Component {
                     id="creditCardNumber"
                     label="Credit Card Number"
                     value={this.state.creditCardNumber}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({creditCardNumber: event.target.value})
+                    }
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -386,9 +369,10 @@ class SignUp extends Component {
                     id="expirationDateMonth"
                     label="Month"
                     value={this.state.expirationDateMonth}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({expirationDateMonth: event.target.value})
+                    }
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -399,9 +383,10 @@ class SignUp extends Component {
                     id="expirationDateYear"
                     label="Year"
                     value={this.state.expirationDateYear}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({expirationDateYear: event.target.value})
+                    }
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -412,9 +397,10 @@ class SignUp extends Component {
                     id="securityCode"
                     label="Security Code"
                     value={this.state.securityCode}
-                    onChange={this.handleChange}
+                    onChange={event =>
+                      this.setState({securityCode: event.target.value})
+                    }
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -451,8 +437,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signUpUser: (email, password, method = 'login') => {
-      dispatch(auth(email, password, method))
+    handleSubmit: (state, method = 'signup') => {
+      dispatch(auth(state, method))
     }
   }
 }
