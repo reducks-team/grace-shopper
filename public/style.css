@@ -22,7 +22,7 @@ form div {
 
 .cart-row {
   width: 45%;
-  background-color: lightgrey;
+  background-color: white;
   font-family: arial;
   margin-left: 30px;
   height: 80%;
@@ -31,4 +31,5 @@ form div {
   display: inline-block;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
