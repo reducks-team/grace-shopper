@@ -99,8 +99,9 @@ export const getCart = userId => async dispatch => {
 export const checkout = userId => async dispatch => {
   try {
     await axios.put(`/api/cart/checkout/${userId}`)
-    await axios.post(`/api/cart/${userId}`)
+    await axios.post(`/api/cart/new/${userId}`)
     dispatch(checkedOut())
+    history.push('/products')
   } catch (err) {
     console.error(err)
   }
