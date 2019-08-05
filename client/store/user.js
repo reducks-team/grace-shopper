@@ -12,6 +12,7 @@ const UPDATE_USER = 'UPDATE_USER'
 const ADD_TO_CART = 'ADD_TO_CART'
 const GET_CART = 'GET_CART'
 const CLEAR_USER = 'CLEAR_USER'
+const CHECKOUT = 'CHECKOUT'
 
 /**
  * INITIAL STATE
@@ -23,10 +24,11 @@ const defaultUser = {
 /**
  * ACTION CREATORS
  */
-const getUser = singleUser => ({type: GET_USER, singleUser})
-const removeUser = user => ({type: REMOVE_USER, user})
+const gotUser = singleUser => ({type: GET_USER, singleUser})
+const removedUser = user => ({type: REMOVE_USER, user})
 const addedToCart = updatedCart => ({type: ADD_TO_CART, updatedCart})
 const gotCart = activeCart => ({type: GET_CART, activeCart})
+const checkedOut = () => ({type: CHECKOUT})
 const clearedUser = () => ({type: CLEAR_USER})
 //const updateUser = user => ({type: UPDATE_USER, user})
 
@@ -36,7 +38,7 @@ const clearedUser = () => ({type: CLEAR_USER})
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultUser.singleUser))
+    dispatch(gotUser(res.data || defaultUser.singleUser))
   } catch (err) {
     console.error(err)
   }
@@ -47,11 +49,11 @@ export const auth = (email, password, method) => async dispatch => {
   try {
     res = await axios.post(`/auth/${method}`, {email, password})
   } catch (authError) {
-    return dispatch(getUser({error: authError}))
+    return dispatch(gotUser({error: authError}))
   }
 
   try {
-    dispatch(getUser(res.data))
+    dispatch(gotUser(res.data))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
@@ -66,7 +68,7 @@ export const clearUser = () => async dispatch => {
 export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')
-    dispatch(removeUser())
+    dispatch(removedUser())
     history.push('/login')
   } catch (err) {
     console.error(err)
@@ -87,9 +89,18 @@ export const addToCart = (userId, productId, productCost) => async dispatch => {
 
 export const getCart = userId => async dispatch => {
   try {
-    console.log('getting cart')
     const activeCart = await axios.get(`/api/cart/${userId}`)
     dispatch(gotCart(activeCart))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const checkout = userId => async dispatch => {
+  try {
+    await axios.put(`/api/cart/checkout/${userId}`)
+    await axios.post(`/api/cart/${userId}`)
+    dispatch(checkedOut())
   } catch (err) {
     console.error(err)
   }
@@ -113,6 +124,8 @@ export default function(state = defaultUser, action) {
       }
     case CLEAR_USER:
       return {...state, singleUser: {}}
+    case CHECKOUT:
+      return {...state}
     default:
       return state
   }
