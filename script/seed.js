@@ -28,7 +28,7 @@ async function seed() {
       billingPostalCode: '11201',
       creditCardNumber: '4786872559155654',
       expirationDate: '07/22',
-      securityCode: 756
+      securityCode: '756'
     }),
     User.create({
       email: 'fgibbs@esgn.com',
