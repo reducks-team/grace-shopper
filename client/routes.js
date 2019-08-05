@@ -9,7 +9,9 @@ import {
   Cart,
   Account,
   SingleProduct,
-  UserHome
+  UserHome,
+  Signup,
+  Login
 } from './components'
 import {me} from './store'
 
@@ -28,11 +30,13 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={UserHome} />
-        <Route exact path="/home" component={UserHome} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/products" component={AllProducts} />
-        <Route exact path="/signin" component={SignIn} />
-        <Route exact path="/cart" component={Cart} />
+        <Route path="/home" component={UserHome} />
+        <Route path="/about" component={About} />
+        <Route path="/products" component={AllProducts} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/cart" component={Cart} />
+        <Route path="/login" component={Login} />
         <Route
           exact
           path="/products/:productId([0-9]+)"

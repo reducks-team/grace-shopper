@@ -14,7 +14,7 @@ import Footer from './components/Footer'
 const App = () => {
   return (
     <div>
-      <AppBar color="primary" position="static">
+      {/* <AppBar color="primary" position="static">
         <Toolbar>
           <TypoGraphy variant="title" color="inherit">
             <Link to="/HomePage">
@@ -23,7 +23,7 @@ const App = () => {
           </TypoGraphy>
           <Navbar2 />
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
       <Navbar />
       <Routes />
       <Footer />

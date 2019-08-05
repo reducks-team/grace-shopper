@@ -11,6 +11,7 @@ const REMOVE_USER = 'REMOVE_USER'
 const UPDATE_USER = 'UPDATE_USER'
 const ADD_TO_CART = 'ADD_TO_CART'
 const GET_CART = 'GET_CART'
+const CREATE_USER = 'CREATE_USER'
 
 /**
  * INITIAL STATE
@@ -26,7 +27,7 @@ const getUser = singleUser => ({type: GET_USER, singleUser})
 const removeUser = user => ({type: REMOVE_USER, user})
 const addedToCart = updatedCart => ({type: ADD_TO_CART, updatedCart})
 const gotCart = activeCart => ({type: GET_CART, activeCart})
-//const updateUser = user => ({type: UPDATE_USER, user})
+const createUser = user => ({type: CREATE_USER, user})
 
 /**
  * THUNK CREATORS
@@ -40,10 +41,10 @@ export const me = () => async dispatch => {
   }
 }
 
-export const auth = (email, password, method) => async dispatch => {
+export const auth = (state, method) => async dispatch => {
   let res
   try {
-    res = await axios.post(`/auth/${method}`, {email, password})
+    res = await axios.post(`/auth/${method}`, state)
   } catch (authError) {
     return dispatch(getUser({error: authError}))
   }
@@ -95,6 +96,8 @@ export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
       return {...state, singleUser: action.singleUser}
+    case CREATE_USER:
+      return {...state}
     case REMOVE_USER:
       return {...state, singleUser: {}}
     case ADD_TO_CART:
