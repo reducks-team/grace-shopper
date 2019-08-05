@@ -8,7 +8,6 @@ class Cart extends Component {
     if (this.props.singleUser.id) {
       this.props.getActiveCart(this.props.singleUser.id)
     }
-    console.log(this.props)
   }
 
   componentDidUpdate() {
