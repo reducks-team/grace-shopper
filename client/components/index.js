@@ -6,6 +6,7 @@
 export {default as Navbar} from './Navbar'
 export {About} from './About'
 export {default as SignIn} from './SignIn'
+export {default as SignUp} from './SignUp'
 export {default as AllProducts} from './AllProducts'
 export {default as ProductThumbnail} from './ProductThumbnail'
 export {default as SingleProduct} from './SingleProduct'
