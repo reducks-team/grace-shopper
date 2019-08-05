@@ -7,6 +7,7 @@ class Cart extends Component {
   componentDidMount() {
     if (this.props.singleUser.id) {
       this.props.getActiveCart(this.props.singleUser.id)
+      console.log(this.props.singleUser)
     }
   }
 
