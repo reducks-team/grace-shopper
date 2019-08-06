@@ -28,7 +28,7 @@ class AllProducts extends Component {
                     <CardMedia
                       component="img"
                       alt={product.name}
-                      height="140"
+                      height="300"
                       title={product.name}
                       image={product.imageUrl}
                     />
@@ -45,7 +45,7 @@ class AllProducts extends Component {
                   </CardActionArea>
                   <CardActions>
                     <Button size="small" color="primary">
-                      Add to Cart
+                      Details
                     </Button>
                   </CardActions>
                 </Card>

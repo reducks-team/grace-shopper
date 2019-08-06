@@ -201,7 +201,10 @@ export default function(state = defaultUser, action) {
     case CHECKOUT:
       return {...state}
     case GET_ORDER_HISTORY:
-      return {...state}
+      return {
+        ...state,
+        singleUser: {...state.singleUser, orderHistory: action.history}
+      }
     default:
       return state
   }
