@@ -8,7 +8,6 @@ class Cart extends Component {
   componentDidMount() {
     if (this.props.singleUser.id) {
       this.props.getActiveCart(this.props.singleUser.id)
-      console.log(this.props.singleUser)
     }
   }
 
@@ -25,27 +24,55 @@ class Cart extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <h1>Your Cart</h1>
-        <CartRow singleUser={this.props.singleUser} />
-        {this.props.activeCart.data.map(product => (
-          <CartRow
-            key={product.product.id}
-            product={product.product}
-            cart={this.props.activeCart}
-          />
-        ))}
-        <Button
-          onClick={this.handleSubmit}
-          fullWidth
-          variant="contained"
-          color="primary"
-        >
-          Checkout
-        </Button>
-      </div>
-    )
+    if (this.props.activeCart.data.length) {
+      const totalPrice = this.props.activeCart.data
+        .map(element => element.itemCost * element.quantity)
+        .reduce((a, b) => a + b, 0)
+      return (
+        <div>
+          <h1>{this.props.singleUser.firstName}'s Cart</h1>
+          <CartRow singleUser={this.props.singleUser} />
+          {this.props.activeCart.data.map(product => (
+            <CartRow
+              key={product.product.id}
+              product={product.product}
+              cart={this.props.activeCart}
+            />
+          ))}
+
+          <h4 className="total">SubTotal: ${totalPrice / 100}</h4>
+          <h4 className="shipping">Shipping: FREE</h4>
+          <h4 className="tax">
+            Estimated Tax: ${Math.round(totalPrice / 100 * 0.06 * 100) / 100}
+          </h4>
+          <h2 className="grandTotal">
+            Total: ${Math.round(totalPrice / 100 * 1.06 * 100) / 100}
+          </h2>
+          <Button
+            onClick={this.handleSubmit}
+            fullWidth
+            variant="contained"
+            color="primary"
+          >
+            Checkout
+          </Button>
+        </div>
+      )
+    } else
+      return (
+        <div>
+          <h1>Your Cart</h1>
+          <CartRow singleUser={this.props.singleUser} />
+          {this.props.activeCart.data.map(product => (
+            <CartRow
+              key={product.product.id}
+              product={product.product}
+              cart={this.props.activeCart}
+            />
+          ))}
+          <h3>Your cart is empty :/</h3>
+        </div>
+      )
   }
 }
 
