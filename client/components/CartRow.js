@@ -21,6 +21,7 @@ class CartRow extends Component {
     }
   }
 
+
   handleQuantityChange = event => {
     //call the thunk from here
     this.props.addToCart(
