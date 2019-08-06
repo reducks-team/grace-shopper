@@ -22,6 +22,20 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
+//This route gets the order history for a user
+router.get('/history/:userId', async (req, res, next) => {
+  try {
+    const historicalOrders = await Order.findAll({
+      where: {userId: Number(req.params.userId), isActive: false},
+      include: [{model: productOrder, include: [Product]}]
+    })
+    res.send(historicalOrders)
+  } catch (error) {
+    console.dir(error)
+    next(error)
+  }
+})
+
 //This route gets the active cart, checks whether an item exists in the cart or not, and then either creates an entry for it or updates the existing entry as appropriate.  Then it returns the new cart with the appropriate quantities
 router.put('/add', async (req, res, next) => {
   try {

@@ -13,6 +13,7 @@ const ADD_TO_CART = 'ADD_TO_CART'
 const GET_CART = 'GET_CART'
 const CLEAR_USER = 'CLEAR_USER'
 const CHECKOUT = 'CHECKOUT'
+const GET_ORDER_HISTORY = 'GET_ORDER_HISTORY'
 
 /**
  * INITIAL STATE
@@ -30,6 +31,7 @@ const addedToCart = updatedCart => ({type: ADD_TO_CART, updatedCart})
 const gotCart = activeCart => ({type: GET_CART, activeCart})
 const checkedOut = () => ({type: CHECKOUT})
 const clearedUser = () => ({type: CLEAR_USER})
+const gotOrderHistory = history => ({type: GET_ORDER_HISTORY, history})
 //const updateUser = user => ({type: UPDATE_USER, user})
 
 /**
@@ -98,6 +100,15 @@ export const getCart = userId => async dispatch => {
   }
 }
 
+export const getOrderHistory = userId => async dispatch => {
+  try {
+    const historicalOrders = await axios.get(`/api/cart/history/${userId}`)
+    dispatch(gotOrderHistory(historicalOrders))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const checkout = userId => async dispatch => {
   try {
     await axios.put(`/api/cart/checkout/${userId}`)
@@ -128,6 +139,8 @@ export default function(state = defaultUser, action) {
     case CLEAR_USER:
       return {...state, singleUser: {}}
     case CHECKOUT:
+      return {...state}
+    case GET_ORDER_HISTORY:
       return {...state}
     default:
       return state

@@ -103,6 +103,24 @@ async function seed() {
       userId: users[0].id
     }),
     Order.create({
+      isActive: false,
+      shippedTo: users[0],
+      cardBilled: {},
+      userId: users[0].id
+    }),
+    Order.create({
+      isActive: false,
+      shippedTo: users[0],
+      cardBilled: {},
+      userId: users[0].id
+    }),
+    Order.create({
+      isActive: false,
+      shippedTo: users[0],
+      cardBilled: {},
+      userId: users[0].id
+    }),
+    Order.create({
       isActive: true,
       shippedTo: null,
       cardBilled: null,
@@ -117,30 +135,30 @@ async function seed() {
   ])
 
   const productOrders = await Promise.all([
-    // productOrder.create({
-    //   quantity: 2,
-    //   itemCost: products[0].price,
-    //   orderId: orders[1].id,
-    //   productId: products[0].id
-    // }),
-    // productOrder.create({
-    //   quantity: 99,
-    //   itemCost: products[2].price,
-    //   orderId: orders[1].id,
-    //   productId: products[2].id
-    // }),
-    // productOrder.create({
-    //   quantity: 5,
-    //   itemCost: products[1].price,
-    //   orderId: orders[0].id,
-    //   productId: products[1].id
-    // }),
-    // productOrder.create({
-    //   quantity: 75,
-    //   itemCost: products[1].price,
-    //   orderId: orders[2].id,
-    //   productId: products[1].id
-    // })
+    productOrder.create({
+      quantity: 1,
+      itemCost: products[0].price,
+      orderId: orders[0].id,
+      productId: products[0].id
+    }),
+    productOrder.create({
+      quantity: 2,
+      itemCost: products[0].price,
+      orderId: orders[1].id,
+      productId: products[0].id
+    }),
+    productOrder.create({
+      quantity: 3,
+      itemCost: products[0].price,
+      orderId: orders[2].id,
+      productId: products[0].id
+    }),
+    productOrder.create({
+      quantity: 4,
+      itemCost: products[0].price,
+      orderId: orders[3].id,
+      productId: products[0].id
+    })
   ])
 
   console.log(`seeded ${users.length} users`)
