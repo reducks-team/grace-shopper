@@ -11,15 +11,15 @@ class CartRow extends Component {
 
   componentDidMount() {}
 
-  componentDidUpdate() {
-    if (!this.props.product) {
-      if (this.props.singleUser !== this.props.singleUser.cart)
-        this.setState({
-          prevProps: this.props.singleUser.art
-        })
-      this.props.getActiveCart(this.props.singleUser.id)
-    }
-  }
+  // componentDidUpdate() {
+  //   if (!this.props.product) {
+  //     if (this.props.singleUser !== this.props.singleUser.cart)
+  //       this.setState({
+  //         prevProps: this.props.singleUser.art
+  //       })
+  //     this.props.getActiveCart(this.props.singleUser.id)
+  //   }
+  // }
 
   handleQuantityChange = event => {
     //call the thunk from here
