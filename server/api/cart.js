@@ -39,7 +39,6 @@ router.get('/history/:userId', async (req, res, next) => {
 //This route gets the active cart, checks whether an item exists in the cart or not, and then either creates an entry for it or updates the existing entry as appropriate.  Then it returns the new cart with the appropriate quantities
 router.put('/add', async (req, res, next) => {
   try {
-    console.log(req.body)
     const activeCart = await Order.findOne({
       where: {userId: Number(req.body.userId), isActive: true},
       attributes: ['id']
