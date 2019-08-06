@@ -57,8 +57,6 @@ class CartRow extends Component {
             <h4>${this.props.product.price / 100}</h4>
             <h4> quantity: </h4>
 
-            <h4>{target[0].quantity}</h4>
-
             <input
               className="quantity-input"
               type="number"
