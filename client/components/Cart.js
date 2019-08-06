@@ -23,7 +23,7 @@ class Cart extends Component {
 
   componentDidUpdate(prevProps) {
     if (
-      !this.props.activeCart.data.length &&
+      !this.props.activeCart.data.length ||
       prevProps.activeCart.data.length !== this.props.activeCart.data.length
     ) {
       this.props.getActiveCart(this.props.singleUser.id)
