@@ -5,21 +5,22 @@ import {getProduct, addToCart, getCart} from '../store'
 class CartRow extends Component {
   constructor(props) {
     super(props)
-    this.state = {prevProps: this.props.singleUser.cart}
     this.handleQuantityChange = this.handleQuantityChange.bind(this)
   }
 
-  componentDidMount() {}
+  componentDidUpdate(prevProps) {
+    if (prevProps.singleUser.cart) {
+      for (let i = 0; i < prevProps.singleUser.cart.data.length; i++) {
+        if (
+          prevProps.singleUser.cart.data[i].quantity !==
+          this.props.singleUser.cart.data[i].quantity
+        ) {
+          this.props.getActiveCart(this.props.singleUser.id)
+        }
+      }
+    }
+  }
 
-  // componentDidUpdate() {
-  //   if (!this.props.product) {
-  //     if (this.props.singleUser !== this.props.singleUser.cart)
-  //       this.setState({
-  //         prevProps: this.props.singleUser.art
-  //       })
-  //     this.props.getActiveCart(this.props.singleUser.id)
-  //   }
-  // }
 
   handleQuantityChange = event => {
     //call the thunk from here

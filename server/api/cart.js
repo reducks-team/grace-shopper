@@ -68,7 +68,8 @@ router.put('/add', async (req, res, next) => {
     }
 
     const UpdatedProductsInCart = await productOrder.findAll({
-      where: {orderId: activeOrderId}
+      where: {orderId: activeOrderId},
+      include: [{model: Product}]
     })
     res.send(UpdatedProductsInCart)
   } catch (error) {
