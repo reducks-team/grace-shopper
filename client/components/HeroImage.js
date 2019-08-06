@@ -12,7 +12,6 @@ const HeroImage = () => {
         width={600}
         mode="fit"
       />
-      <p>Slogan</p>
     </div>
   )
 }

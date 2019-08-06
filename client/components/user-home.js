@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import HeroImage from './HeroImage'
+import FeaturedProducts from './FeaturedProducts'
+// import Footer from './Footer'
 
 /**
  * COMPONENT
@@ -11,8 +13,9 @@ export const UserHome = props => {
 
   return (
     <div>
-      <h3>Welcome</h3>
       <HeroImage />
+      <FeaturedProducts />
+      {/* <Footer /> */}
     </div>
   )
 }
