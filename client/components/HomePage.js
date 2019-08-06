@@ -1,6 +1,6 @@
 import React from 'react'
 import HeroImage from './HeroImage'
-import FeaturedProducts from './FeaturedProducts'
+import {FeaturedProducts} from './FeaturedProducts'
 
 class HomePage extends React.Component {
   componentDidMount() {}
