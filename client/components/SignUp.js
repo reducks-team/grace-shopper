@@ -14,7 +14,7 @@ import Container from '@material-ui/core/Container'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {withStyles} from '@material-ui/core/styles'
 import {connect} from 'react-redux'
-import {auth} from '../store'
+import {createUser} from '../store'
 
 const styles = theme => ({
   '@global': {
@@ -45,88 +45,49 @@ class SignUp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      email: '',
-      password: '',
-      firstName: '',
-      lastName: '',
-      phoneNumber: '',
-      streetAddress: '',
-      addressLineTwo: '',
-      city: '',
-      state: '',
-      country: '',
-      postalCode: '',
-      billingStreetAddress: '',
-      billingAddressLineTwo: '',
-      billingCity: '',
-      billingState: '',
-      billingCountry: '',
-      billingPostalCode: '',
-      creditCardNumber: '',
-      expirationDateMonth: '',
-      expirationDateYear: '',
-      securityCode: ''
+      user: {
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        phoneNumber: '',
+        streetAddress: '',
+        addressLineTwo: '',
+        city: '',
+        state: '',
+        country: '',
+        postalCode: '',
+        billingStreetAddress: '',
+        billingAddressLineTwo: '',
+        billingCity: '',
+        billingState: '',
+        billingCountry: '',
+        billingPostalCode: '',
+        creditCardNumber: '',
+        expirationDateMonth: '',
+        expirationDateYear: '',
+        securityCode: ''
+      }
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
+    const {name, value} = event.target
+    const {user} = this.state
+    this.setState({user: {...user, [name]: value}})
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    const {user} = this.state
+    if (user.firstName && user.lastName && user.email && user.password) {
+      this.props.signUpUser(user)
+    }
   }
 
   componentDidMount() {}
-
-  handleSubmit = event => {
-    console.log(this.props)
-    event.preventDefault()
-    const email = event.target.email.value
-    const password = event.target.password.value
-    const firstName = event.target.firstName.value
-    const lastName = event.target.lastName.value
-    const phoneNumber = event.target.phoneNumber.value
-    const streetAddress = event.target.streetAddress.value
-    const addresslineTwo = event.target.addresslineTwo.value
-    const city = event.target.city.value
-    const state = event.target.state.value
-    const country = event.target.country.value
-    const postalCode = event.target.postalCode.value
-    const billingStreetAddress = event.target.billingStreetAddress.value
-    const billingAddressLineTwo = event.target.billingAddressLineTwo.value
-    const billingCity = event.target.billingCity.value
-    const billingState = event.target.billingState.value
-    const billingCountry = event.target.billingCountry.value
-    const billingPostalCode = event.target.billingPostalCode.value
-    const creditCardNumber = event.target.creditCardNumber.value
-    const expirationDateMonth = event.target.expirationDateMonth.value
-    const expirationDateYear = event.target.expirationDateYear.value
-    const securityCode = event.target.securityCode.value
-
-    this.props.signUpUser(
-      email,
-      password,
-      firstName,
-      lastName,
-      phoneNumber,
-      streetAddress,
-      addresslineTwo,
-      city,
-      state,
-      country,
-      postalCode,
-      billingStreetAddress,
-      billingAddressLineTwo,
-      billingCity,
-      billingState,
-      billingCountry,
-      billingPostalCode,
-      creditCardNumber,
-      expirationDateMonth,
-      expirationDateMonth,
-      securityCode
-    )
-  }
 
   render() {
     const {classes} = this.props
@@ -207,7 +168,6 @@ class SignUp extends Component {
                     value={this.state.phoneNumber}
                     onChange={this.handleChange}
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -220,7 +180,6 @@ class SignUp extends Component {
                     value={this.state.streetAddress}
                     onChange={this.handleChange}
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -245,7 +204,6 @@ class SignUp extends Component {
                     value={this.state.city}
                     onChange={this.handleChange}
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -258,7 +216,6 @@ class SignUp extends Component {
                     value={this.state.state}
                     onChange={this.handleChange}
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -271,7 +228,6 @@ class SignUp extends Component {
                     value={this.state.country}
                     onChange={this.handleChange}
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -284,7 +240,6 @@ class SignUp extends Component {
                     value={this.state.postalCode}
                     onChange={this.handleChange}
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -297,7 +252,6 @@ class SignUp extends Component {
                     value={this.state.billingStreetAddress}
                     onChange={this.handleChange}
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -310,7 +264,6 @@ class SignUp extends Component {
                     value={this.state.billingAddressLineTwo}
                     onChange={this.handleChange}
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -323,7 +276,6 @@ class SignUp extends Component {
                     value={this.state.billingCity}
                     onChange={this.handleChange}
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -336,7 +288,6 @@ class SignUp extends Component {
                     value={this.state.billingState}
                     onChange={this.handleChange}
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -349,7 +300,6 @@ class SignUp extends Component {
                     value={this.state.billingCountry}
                     onChange={this.handleChange}
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -362,7 +312,6 @@ class SignUp extends Component {
                     value={this.state.billingPostalCode}
                     onChange={this.handleChange}
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -375,7 +324,6 @@ class SignUp extends Component {
                     value={this.state.creditCardNumber}
                     onChange={this.handleChange}
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -388,7 +336,6 @@ class SignUp extends Component {
                     value={this.state.expirationDateMonth}
                     onChange={this.handleChange}
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -401,7 +348,6 @@ class SignUp extends Component {
                     value={this.state.expirationDateYear}
                     onChange={this.handleChange}
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -414,7 +360,6 @@ class SignUp extends Component {
                     value={this.state.securityCode}
                     onChange={this.handleChange}
                     variant="outlined"
-                    required
                     fullWidth
                   />
                 </Grid>
@@ -451,8 +396,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signUpUser: (email, password, method = 'login') => {
-      dispatch(auth(email, password, method))
+    signUpUser: state => {
+      dispatch(createUser(state))
     }
   }
 }
@@ -460,63 +405,3 @@ const mapDispatchToProps = dispatch => {
 export default connect(mapStateToProps, mapDispatchToProps)(
   withStyles(styles)(SignUp)
 )
-
-/* // <div>
-      //   <h1>Create a New Account</h1>
-      //   <form onSubmit={this.handleSubmit}>
-      //     <div>
-      //       <label> Email </label>
-      //       <input
-      //         type="text"
-      //         name="email"
-      //         value={this.state.email}
-      //         onChange={this.handleEmailChange}
-      //       />
-      //     </div>
-          <div>
-            <label> Password </label>
-            <input
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handlePasswordChange}
-            />
-          </div>
-          <button>Submit</button>
-        </form>
-      </div> */
-
-// class SignUp extends Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       email: '',
-//       password: ''
-//     }
-//     this.handleSubmit = this.handleSubmit.bind(this)
-//   }
-
-//   handleEmailChange = event => {
-//     this.setState({
-//       email: event.target.value
-//     })
-//   }
-
-//   handlePasswordChange = event => {
-//     this.setState({
-//       password: event.target.value
-//     })
-//   }
-
-//   componentDidMount() {}
-
-//   handleSubmit = event => {
-//     event.preventDefault()
-//     const email = event.target.email.value
-//     const password = event.target.password.value
-//     this.props.signInUser(email, password)
-//   }
-
-//     render() {
-//       const {classes} = this.props
-//       return (

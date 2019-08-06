@@ -1,6 +1,6 @@
 import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/ToolBar'
+import Toolbar from '@material-ui/core/Toolbar'
 import TypoGraphy from '@material-ui/core/Typography'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import Routes from './routes'

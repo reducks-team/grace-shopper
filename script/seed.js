@@ -28,7 +28,7 @@ async function seed() {
       billingPostalCode: '11201',
       creditCardNumber: '4786872559155654',
       expirationDate: '07/22',
-      securityCode: 756
+      securityCode: '756'
     }),
     User.create({
       email: 'fgibbs@esgn.com',
@@ -59,70 +59,61 @@ async function seed() {
     }),
     Product.create({
       name: 'Test Duck',
-      description: 'TEST DESCRIPTION',
+      description: 'This is our one test duck',
       imageUrl:
-        'https://cdn.shopify.com/s/files/1/0604/4801/products/Elvis_1-min-min_1024x1024.jpg?v=1534974546',
+        'https://cdn.shopify.com/s/files/1/0604/4801/products/Office_1_1024x1024.jpeg?v=1505544348',
       price: 69,
       inventory: 15,
       tags: ['donec', 'maximus']
     }),
     Product.create({
-      name: 'Sailor Duck',
+      name: 'Turkey Duck',
       imageUrl:
-        'https://cdn.shopify.com/s/files/1/0604/4801/products/Sailor_1_1024x1024.jpeg?v=1505606552',
-      description: 'Lorem ipsum sailor est',
+        'https://cdn.shopify.com/s/files/1/0604/4801/products/Turkey_1_1024x1024.jpeg?v=1505453354',
+      description: 'thanksgiving duck',
       price: 999,
       inventory: 200,
       tags: ['lorem', 'ipsum']
     }),
     Product.create({
-      name: 'Elvis Duck',
+      name: 'Pirate Duck',
       imageUrl:
-        'https://cdn.shopify.com/s/files/1/0604/4801/products/Elvis_1-min-min_1024x1024.jpg?v=1534974546',
-      description: 'dolor sit amet',
+        'https://cdn.shopify.com/s/files/1/0604/4801/products/Pirate_1_b0a169e0-feba-450d-b81b-f3db5703c7d4_1024x1024.jpeg?v=1514697320',
+      description: 'arggggggggh',
       price: 749,
       inventory: 150,
       tags: ['donec', 'maximus']
     }),
     Product.create({
-      name: 'Test Duck',
-      description: 'TEST DESCRIPTION',
+      name: 'Baseball Duck',
+      description: 'lets play ball',
       imageUrl:
-        'https://cdn.shopify.com/s/files/1/0604/4801/products/Elvis_1-min-min_1024x1024.jpg?v=1534974546',
+        'https://cdn.shopify.com/s/files/1/0604/4801/products/baseball_1_modified_1024x1024.jpg?v=1505346044',
       price: 699,
       inventory: 1,
-      tags: ['donec', 'maximus']
-    }),
-    Product.create({
-      name: 'Sailor Duck',
-      imageUrl:
-        'https://cdn.shopify.com/s/files/1/0604/4801/products/Sailor_1_1024x1024.jpeg?v=1505606552',
-      description: 'Lorem ipsum sailor est',
-      price: 849,
-      inventory: 150,
-      tags: ['lorem', 'ipsum']
-    }),
-    Product.create({
-      name: 'Elvis Duck',
-      imageUrl:
-        'https://cdn.shopify.com/s/files/1/0604/4801/products/Elvis_1-min-min_1024x1024.jpg?v=1534974546',
-      description: 'dolor sit amet',
-      price: 849,
-      inventory: 50,
-      tags: ['donec', 'maximus']
-    }),
-    Product.create({
-      name: 'Test Duck',
-      imageUrl:
-        'https://cdn.shopify.com/s/files/1/0604/4801/products/Elvis_1-min-min_1024x1024.jpg?v=1534974546',
-      description: 'TEST DESCRIPTION',
-      price: 679,
-      inventory: 140,
       tags: ['donec', 'maximus']
     })
   ])
 
   const orders = await Promise.all([
+    Order.create({
+      isActive: false,
+      shippedTo: users[0],
+      cardBilled: {},
+      userId: users[0].id
+    }),
+    Order.create({
+      isActive: false,
+      shippedTo: users[0],
+      cardBilled: {},
+      userId: users[0].id
+    }),
+    Order.create({
+      isActive: false,
+      shippedTo: users[0],
+      cardBilled: {},
+      userId: users[0].id
+    }),
     Order.create({
       isActive: false,
       shippedTo: users[0],
@@ -145,28 +136,28 @@ async function seed() {
 
   const productOrders = await Promise.all([
     productOrder.create({
+      quantity: 1,
+      itemCost: products[0].price,
+      orderId: orders[0].id,
+      productId: products[0].id
+    }),
+    productOrder.create({
       quantity: 2,
       itemCost: products[0].price,
       orderId: orders[1].id,
       productId: products[0].id
     }),
     productOrder.create({
-      quantity: 99,
-      itemCost: products[2].price,
-      orderId: orders[1].id,
-      productId: products[2].id
-    }),
-    productOrder.create({
-      quantity: 5,
-      itemCost: products[1].price,
-      orderId: orders[0].id,
-      productId: products[1].id
-    }),
-    productOrder.create({
-      quantity: 75,
-      itemCost: products[1].price,
+      quantity: 3,
+      itemCost: products[0].price,
       orderId: orders[2].id,
-      productId: products[1].id
+      productId: products[0].id
+    }),
+    productOrder.create({
+      quantity: 4,
+      itemCost: products[0].price,
+      orderId: orders[3].id,
+      productId: products[0].id
     })
   ])
 

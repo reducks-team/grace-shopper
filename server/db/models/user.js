@@ -4,18 +4,10 @@ const db = require('../db')
 
 const User = db.define('user', {
   firstName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
   },
   lastName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
   },
   email: {
     type: Sequelize.STRING,
@@ -53,7 +45,7 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   phoneNumber: {
-    type: Sequelize.BIGINT
+    type: Sequelize.STRING
   },
   streetAddress: {
     type: Sequelize.STRING
@@ -71,7 +63,7 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   postalCode: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   },
   billingStreetAddress: {
     type: Sequelize.STRING
@@ -89,7 +81,7 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   billingPostalCode: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   },
   creditCardNumber: {
     type: Sequelize.STRING,
@@ -98,10 +90,16 @@ const User = db.define('user', {
     }
   },
   expirationDate: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    get() {
+      return () => this.getDataValue('expirationDate')
+    }
   },
   securityCode: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING,
+    get() {
+      return () => this.getDataValue('securityCode')
+    }
   }
 })
 
@@ -132,18 +130,29 @@ User.encrypt = function(plainText, salt) {
 /**
  * hooks
  */
-const setSaltPasswordCC = user => {
-  if (user.changed('password') || user.changed('creditCardNumber')) {
+const setAllEncrypted = user => {
+  if (
+    user.changed('password') ||
+    user.changed('creditCardNumber') ||
+    user.changed('expirationDate') ||
+    user.changed('securityCode')
+  ) {
     user.salt = User.generateSalt()
     user.password = User.encrypt(user.password(), user.salt())
     if (user.creditCardNumber()) {
       user.creditCardNumber = User.encrypt(user.creditCardNumber(), user.salt())
     }
+    if (user.expirationDate()) {
+      user.expirationDate = User.encrypt(user.expirationDate(), user.salt())
+    }
+    if (user.securityCode()) {
+      user.securityCode = User.encrypt(user.securityCode(), user.salt())
+    }
   }
 }
 
-User.beforeCreate(setSaltPasswordCC)
-User.beforeUpdate(setSaltPasswordCC)
+User.beforeCreate(setAllEncrypted)
+User.beforeUpdate(setAllEncrypted)
 User.beforeBulkCreate(users => {
-  users.forEach(setSaltPasswordCC)
+  users.forEach(setAllEncrypted)
 })
