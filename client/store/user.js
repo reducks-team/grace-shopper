@@ -81,6 +81,11 @@ export const createUser = state => async dispatch => {
     console.error(err)
   }
   try {
+    await axios.post(`/auth/login/${res.data}`)
+  } catch (err) {
+    console.error(err)
+  }
+  try {
     dispatch(createdUser(res.data))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
@@ -105,7 +110,7 @@ export const updateUser = (user, userId) => async dispatch => {
 }
 
 //This clearUser thunk exists to clear the singleUser.error field that pops up when you enter an incorrect username and password
-export const clearUser = dispatch => {
+export const clearUser = () => async dispatch => {
   dispatch(clearedUser())
 }
 
@@ -214,7 +219,10 @@ export default function(state = defaultUser, action) {
     case CHECKOUT:
       return {...state}
     case GET_ORDER_HISTORY:
-      return {...state}
+      return {
+        ...state,
+        singleUser: {...state.singleUser, orderHistory: action.history}
+      }
     default:
       return state
   }

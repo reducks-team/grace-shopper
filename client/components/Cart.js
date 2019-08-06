@@ -12,19 +12,27 @@ class Cart extends Component {
       redirect: false
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.flag = false
   }
 
   componentDidMount() {
     if (this.props.singleUser.id) {
       this.props.getActiveCart(this.props.singleUser.id)
     }
-    console.log(this.props.singleUser)
   }
 
   componentDidUpdate(prevProps) {
+    if (this.props.activeCart.data.length === 0 && this.flag === false) {
+      this.props.getActiveCart(this.props.singleUser.id)
+      this.flag = true
+    }
     if (
-      !this.props.activeCart.data.length &&
-      prevProps.activeCart.data.length !== this.props.activeCart.data.length
+      this.props.activeCart.data.length === prevProps.activeCart.data.length
+    ) {
+      return undefined
+    }
+    if (
+      this.props.activeCart.data.length !== prevProps.activeCart.data.length
     ) {
       this.props.getActiveCart(this.props.singleUser.id)
     }
@@ -101,6 +109,7 @@ class Cart extends Component {
 const mapStateToProps = state => {
   return {
     singleUser: state.user.singleUser,
+    //activeCartLength: state.user.singleUser.cart ? state.user.singleUser.cart.data.length : [],
     activeCart: state.user.singleUser.cart || {data: []}
   }
 }
