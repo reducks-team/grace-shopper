@@ -10,6 +10,7 @@ const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const UPDATE_USER = 'UPDATE_USER'
 const ADD_TO_CART = 'ADD_TO_CART'
+const UPDATE_CART = 'UPDATE_CART'
 const GET_CART = 'GET_CART'
 
 const CLEAR_USER = 'CLEAR_USER'
@@ -29,6 +30,8 @@ const defaultUser = {
 const gotUser = singleUser => ({type: GET_USER, singleUser})
 const removedUser = user => ({type: REMOVE_USER, user})
 const addedToCart = updatedCart => ({type: ADD_TO_CART, updatedCart})
+const updatedCart = updatedCart => ({type: UPDATE_CART, updatedCart})
+
 const gotCart = activeCart => ({type: GET_CART, activeCart})
 
 const checkedOut = () => ({type: CHECKOUT})
@@ -93,6 +96,25 @@ export const addToCart = (userId, productId, productCost) => async dispatch => {
   }
 }
 
+export const updateCart = (
+  userId,
+  productId,
+  productCost,
+  quantity
+) => async dispatch => {
+  try {
+    const newCart = await axios.put('/api/cart/update', {
+      userId: userId,
+      productId: productId,
+      productCost: productCost,
+      quantity: quantity
+    })
+    dispatch(updatedCart(newCart))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const getCart = userId => async dispatch => {
   try {
     const activeCart = await axios.get(`/api/cart/${userId}`)
@@ -140,6 +162,11 @@ export default function(state = defaultUser, action) {
       return {
         ...state,
         singleUser: {...state.singleUser, cart: action.activeCart}
+      }
+    case UPDATE_CART:
+      return {
+        ...state,
+        singleUser: {...state.singleUser, cart: action.updatedCart}
       }
     case CLEAR_USER:
       return {...state, singleUser: {}}

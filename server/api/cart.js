@@ -78,6 +78,40 @@ router.put('/add', async (req, res, next) => {
   }
 })
 
+router.put('/update', async (req, res, next) => {
+  try {
+    const activeCart = await Order.findOne({
+      where: {userId: Number(req.body.userId), isActive: true},
+      attributes: ['id']
+    })
+    const activeOrderId = activeCart.id
+    const allProductsInCart = await productOrder.findAll({
+      where: {orderId: activeOrderId},
+      include: [{model: Product}]
+    })
+
+    let filteredArray = allProductsInCart.filter(
+      product =>
+        Number(product.dataValues.productId) === Number(req.body.productId)
+    )
+    if (filteredArray.length) {
+      await productOrder.update(
+        {quantity: req.body.quantity},
+        {where: {productId: req.body.productId, orderId: activeOrderId}}
+      )
+    }
+
+    const UpdatedProductsInCart = await productOrder.findAll({
+      where: {orderId: activeOrderId},
+      include: [{model: Product}]
+    })
+    res.send(UpdatedProductsInCart)
+  } catch (error) {
+    console.dir(error)
+    next(error)
+  }
+})
+
 //This route creates a new active order
 router.post('/new/:userId', async (req, res, next) => {
   try {
