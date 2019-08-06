@@ -132,7 +132,10 @@ export default function(state = defaultUser, action) {
     case REMOVE_USER:
       return {...state, singleUser: {}}
     case ADD_TO_CART:
-      return {...state}
+      return {
+        ...state,
+        singleUser: {...state.singleUser, cart: action.updatedCart}
+      }
     case GET_CART:
       return {
         ...state,
