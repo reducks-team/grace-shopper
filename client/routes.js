@@ -12,6 +12,7 @@ import {
   UserHome,
   Recommendations,
   Checkout,
+  OrderHistory,
   SignUp
 } from './components'
 import {me} from './store'
@@ -40,6 +41,7 @@ class Routes extends Component {
         <Route exact path="/HomePage" component={UserHome} />
         <Route exact path="/recommendations" component={Recommendations} />
         <Route exact path="/Checkout" component={Checkout} />
+        <Route exact path="/OrderHistory" component={OrderHistory} />
         <Route
           exact
           path="/products/:productId([0-9]+)"
