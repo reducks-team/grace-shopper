@@ -14,6 +14,7 @@ const GET_CART = 'GET_CART'
 
 const CLEAR_USER = 'CLEAR_USER'
 const CHECKOUT = 'CHECKOUT'
+const GET_ORDER_HISTORY = 'GET_ORDER_HISTORY'
 
 /**
  * INITIAL STATE
@@ -32,6 +33,7 @@ const gotCart = activeCart => ({type: GET_CART, activeCart})
 
 const checkedOut = () => ({type: CHECKOUT})
 const clearedUser = () => ({type: CLEAR_USER})
+const gotOrderHistory = history => ({type: GET_ORDER_HISTORY, history})
 //const updateUser = user => ({type: UPDATE_USER, user})
 
 /**
@@ -63,7 +65,7 @@ export const auth = (email, password, method) => async dispatch => {
 }
 
 //This clearUser thunk exists to clear the singleUser.error field that pops up when you enter an incorrect username and password
-export const clearUser = () => async dispatch => {
+export const clearUser = dispatch => {
   dispatch(clearedUser())
 }
 
@@ -79,9 +81,11 @@ export const logout = () => async dispatch => {
 
 export const addToCart = (userId, productId, productCost) => async dispatch => {
   try {
-    const updatedCart = await axios.put(
-      `/api/cart/${userId}/${productId}/${productCost}`
-    )
+    const updatedCart = await axios.put('/api/cart/add', {
+      userId: userId,
+      productId: productId,
+      productCost: productCost
+    })
     dispatch(addedToCart(updatedCart))
     history.push('/cart')
   } catch (err) {
@@ -93,6 +97,15 @@ export const getCart = userId => async dispatch => {
   try {
     const activeCart = await axios.get(`/api/cart/${userId}`)
     dispatch(gotCart(activeCart))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const getOrderHistory = userId => async dispatch => {
+  try {
+    const historicalOrders = await axios.get(`/api/cart/history/${userId}`)
+    dispatch(gotOrderHistory(historicalOrders))
   } catch (err) {
     console.error(err)
   }
@@ -128,6 +141,8 @@ export default function(state = defaultUser, action) {
     case CLEAR_USER:
       return {...state, singleUser: {}}
     case CHECKOUT:
+      return {...state}
+    case GET_ORDER_HISTORY:
       return {...state}
     default:
       return state

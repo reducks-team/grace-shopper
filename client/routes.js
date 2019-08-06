@@ -10,6 +10,7 @@ import {
   Account,
   SingleProduct,
   UserHome,
+  Recommendations,
   Checkout,
   SignUp
 } from './components'
@@ -37,6 +38,7 @@ class Routes extends Component {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/HomePage" component={UserHome} />
+        <Route exact path="/recommendations" component={Recommendations} />
         <Route exact path="/Checkout" component={Checkout} />
         <Route
           exact
