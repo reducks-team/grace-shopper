@@ -11,8 +11,11 @@ class Cart extends Component {
     }
   }
 
-  componentDidUpdate() {
-    if (!this.props.activeCart.data.length) {
+  componentDidUpdate(prevProps) {
+    if (
+      !this.props.activeCart.data.length &&
+      prevProps.activeCart.data.length !== this.props.activeCart.data.length
+    ) {
       this.props.getActiveCart(this.props.singleUser.id)
     }
   }

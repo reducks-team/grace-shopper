@@ -9,7 +9,7 @@ class CartRow extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.singleUser.cart) {
+    if (prevProps.singleUser.cart && this.props.singleUser.cart.data.length) {
       for (let i = 0; i < prevProps.singleUser.cart.data.length; i++) {
         if (
           prevProps.singleUser.cart.data[i].quantity !==
