@@ -3,12 +3,22 @@ import {connect} from 'react-redux'
 import {getCart, checkout} from '../store'
 import {CartRow} from '.'
 import Button from '@material-ui/core/Button'
+import {Redirect} from 'react-router-dom'
 
 class Cart extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      redirect: false
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
   componentDidMount() {
     if (this.props.singleUser.id) {
       this.props.getActiveCart(this.props.singleUser.id)
     }
+    console.log(this.props.singleUser)
   }
 
   componentDidUpdate(prevProps) {
@@ -23,10 +33,19 @@ class Cart extends Component {
   handleSubmit = event => {
     event.preventDefault()
 
-    this.props.checkout(this.props.singleUser.id)
+    if (this.props.singleUser.billingCity) {
+      this.props.checkout(this.props.singleUser.id)
+    } else {
+      this.setState({
+        redirect: true
+      })
+    }
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/account" />
+    }
     if (this.props.activeCart.data.length) {
       const totalPrice = this.props.activeCart.data
         .map(element => element.itemCost * element.quantity)
