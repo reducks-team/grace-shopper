@@ -61,7 +61,7 @@ export const auth = (email, password, method) => async dispatch => {
 }
 
 //This clearUser thunk exists to clear the singleUser.error field that pops up when you enter an incorrect username and password
-export const clearUser = () => async dispatch => {
+export const clearUser = dispatch => {
   dispatch(clearedUser())
 }
 
@@ -77,9 +77,11 @@ export const logout = () => async dispatch => {
 
 export const addToCart = (userId, productId, productCost) => async dispatch => {
   try {
-    const updatedCart = await axios.put(
-      `/api/cart/${userId}/${productId}/${productCost}`
-    )
+    const updatedCart = await axios.put('/api/cart/add', {
+      userId: userId,
+      productId: productId,
+      productCost: productCost
+    })
     dispatch(addedToCart(updatedCart))
     history.push('/products')
   } catch (err) {
@@ -99,7 +101,7 @@ export const getCart = userId => async dispatch => {
 export const checkout = userId => async dispatch => {
   try {
     await axios.put(`/api/cart/checkout/${userId}`)
-    await axios.post(`/api/cart/${userId}`)
+    await axios.post(`/api/cart/new/${userId}`)
     dispatch(checkedOut())
   } catch (err) {
     console.error(err)
