@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getProduct, addToCart, getCart} from '../store'
+import {getProduct, addToCart, getCart, updateCart} from '../store'
 
 class CartRow extends Component {
   constructor(props) {
@@ -21,13 +21,15 @@ class CartRow extends Component {
     }
   }
 
-
   handleQuantityChange = event => {
+    if (!event.target.value) event.target.value = 0
+
     //call the thunk from here
-    this.props.addToCart(
+    this.props.updateCart(
       this.props.singleUser.id,
       this.props.product.id,
-      this.props.singleProduct.price
+      this.props.singleProduct.price,
+      event.target.value
     )
 
     console.log('quanity has changed!')
@@ -55,8 +57,6 @@ class CartRow extends Component {
             <h4>${this.props.product.price / 100}</h4>
             <h4> quantity: </h4>
 
-            <h4>{target[0].quantity}</h4>
-
             <input
               className="quantity-input"
               type="number"
@@ -83,7 +83,9 @@ const mapDispatchToProps = dispatch => {
     getProduct: productId => dispatch(getProduct(productId)),
     addToCart: (userId, productId, productCost) =>
       dispatch(addToCart(userId, productId, productCost)),
-    getActiveCart: userId => dispatch(getCart(userId))
+    getActiveCart: userId => dispatch(getCart(userId)),
+    updateCart: (userId, productId, productCost, quantity) =>
+      dispatch(updateCart(userId, productId, productCost, quantity))
   }
 }
 
