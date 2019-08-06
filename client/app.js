@@ -7,17 +7,24 @@ import Routes from './routes'
 import Navbar2 from './components/NavBar2'
 import {UserHome} from './components/user-home'
 import Footer from './components/Footer'
-// import FeaturedProducts from './components/FeaturedProducts'
-// import Footer from './components/Footer'
+import {makeStyles} from '@material-ui/core/styles'
 
-const App = () => {
+const useStyles = makeStyles(theme => ({
+  root: {
+    backgroundColor: '#00BCD4'
+  }
+}))
+
+function App() {
+  const classes = useStyles()
+
   return (
     <div>
-      <AppBar color="primary" position="static">
-        <Toolbar>
-          <TypoGraphy variant="title" color="inherit">
+      <AppBar color="secondary" position="static">
+        <Toolbar className={classes.root}>
+          <TypoGraphy variant="title" color="secondary">
             <Link to="/home">
-              <h1> REDUCKS </h1>
+              <h1 className="logo"> REDUCKS </h1>
             </Link>
           </TypoGraphy>
           <Navbar2 />

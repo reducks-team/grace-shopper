@@ -8,70 +8,82 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
+import {makeStyles} from '@material-ui/core/styles'
 
-const Navbar2 = ({isLoggedIn, clickLogout}) => (
-  <div>
-    {isLoggedIn ? (
-      <List component="nav">
-        <ListItem component="div">
-          <ListItemText inset>
-            <TypoGraphy color="inherit" variant="title">
-              <Link to="/products">Products</Link>
-            </TypoGraphy>
-          </ListItemText>
+const useStyles = makeStyles(theme => ({
+  root: {
+    backgroundColor: '#00BCD4',
+    textColor: '#FFFFFF'
+  }
+}))
 
-          <ListItemText inset>
-            <TypoGraphy color="inherit" variant="title">
-              <Link to="/account">Account</Link>
-            </TypoGraphy>
-          </ListItemText>
+function Navbar2({isLoggedIn, clickLogout}) {
+  const classes = useStyles()
 
-          <ListItemText inset>
-            <TypoGraphy color="inherit" variant="title">
-              <Link to="/cart">Cart</Link>
-            </TypoGraphy>
-          </ListItemText>
+  return (
+    <div className={classes.root}>
+      {isLoggedIn ? (
+        <List component="nav">
+          <ListItem component="div">
+            <ListItemText inset>
+              <TypoGraphy color="inherit" variant="title">
+                <Link to="/products">Products</Link>
+              </TypoGraphy>
+            </ListItemText>
 
-          <ListItemText inset>
-            <TypoGraphy color="inherit" variant="title">
-              <Link to="/HomePage" onClick={clickLogout}>
-                Logout
-              </Link>
-            </TypoGraphy>
-          </ListItemText>
-        </ListItem>
-      </List>
-    ) : (
-      <List component="nav">
-        <ListItem component="div">
-          <ListItemText inset>
-            <TypoGraphy color="inherit" variant="title">
-              <Link to="/products">Products</Link>
-            </TypoGraphy>
-          </ListItemText>
+            <ListItemText inset>
+              <TypoGraphy color="inherit" variant="title">
+                <Link to="/account">Account</Link>
+              </TypoGraphy>
+            </ListItemText>
 
-          <ListItemText inset>
-            <TypoGraphy color="inherit" variant="title">
-              <Link to="/cart">Cart</Link>
-            </TypoGraphy>
-          </ListItemText>
+            <ListItemText inset>
+              <TypoGraphy color="inherit" variant="title">
+                <Link to="/cart">Cart</Link>
+              </TypoGraphy>
+            </ListItemText>
 
-          <ListItemText inset>
-            <TypoGraphy color="inherit" variant="title">
-              <Link to="/signin">Sign In</Link>
-            </TypoGraphy>
-          </ListItemText>
+            <ListItemText inset>
+              <TypoGraphy color="inherit" variant="title">
+                <Link to="/HomePage" onClick={clickLogout}>
+                  Logout
+                </Link>
+              </TypoGraphy>
+            </ListItemText>
+          </ListItem>
+        </List>
+      ) : (
+        <List component="nav">
+          <ListItem component="div">
+            <ListItemText inset>
+              <TypoGraphy color="inherit" variant="title">
+                <Link to="/products">Products</Link>
+              </TypoGraphy>
+            </ListItemText>
 
-          <ListItemText inset>
-            <TypoGraphy color="inherit" variant="title">
-              <Link to="/signup">Sign Up</Link>
-            </TypoGraphy>
-          </ListItemText>
-        </ListItem>
-      </List>
-    )}
-  </div>
-)
+            <ListItemText inset>
+              <TypoGraphy color="inherit" variant="title">
+                <Link to="/cart">Cart</Link>
+              </TypoGraphy>
+            </ListItemText>
+
+            <ListItemText inset>
+              <TypoGraphy color="inherit" variant="title">
+                <Link to="/signin">Sign In</Link>
+              </TypoGraphy>
+            </ListItemText>
+
+            <ListItemText inset>
+              <TypoGraphy color="inherit" variant="title">
+                <Link to="/signup">Sign Up</Link>
+              </TypoGraphy>
+            </ListItemText>
+          </ListItem>
+        </List>
+      )}
+    </div>
+  )
+}
 
 /**
  * CONTAINER

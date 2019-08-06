@@ -13,9 +13,22 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  color: white;
+}
+
+.MuiTypography-body1 {
+  color: white;
+}
+
+.MuiTypography-root.MuiTypography-colorSecondary a {
+  color: white;
 }
 
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+header {
+  background-color: red;
 }
