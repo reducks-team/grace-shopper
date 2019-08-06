@@ -94,7 +94,7 @@ export const createUser = state => async dispatch => {
 }
 
 //This clearUser thunk exists to clear the singleUser.error field that pops up when you enter an incorrect username and password
-export const clearUser = dispatch => {
+export const clearUser = () => async dispatch => {
   dispatch(clearedUser())
 }
 
