@@ -39,6 +39,8 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
+    console.log(req.body)
+    console.log(req.params.id)
     const userToUpdate = await User.findByPk(Number(req.params.id))
     !userToUpdate && res.sendStatus(404)
     await userToUpdate.update(req.body)

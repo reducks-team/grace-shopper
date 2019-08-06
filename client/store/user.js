@@ -38,7 +38,7 @@ const gotCart = activeCart => ({type: GET_CART, activeCart})
 const checkedOut = () => ({type: CHECKOUT})
 const clearedUser = () => ({type: CLEAR_USER})
 const gotOrderHistory = history => ({type: GET_ORDER_HISTORY, history})
-//const updateUser = user => ({type: UPDATE_USER, user})
+const updatedUser = user => ({type: UPDATE_USER, user})
 
 /**
  * THUNK CREATORS
@@ -87,6 +87,22 @@ export const createUser = state => async dispatch => {
   }
   try {
     dispatch(createdUser(res.data))
+    history.push('/home')
+  } catch (dispatchOrHistoryErr) {
+    console.error(dispatchOrHistoryErr)
+  }
+}
+
+export const updateUser = (user, userId) => async dispatch => {
+  let res
+  try {
+    console.log(user)
+    res = await axios.put(`/api/users/${userId}`, user)
+  } catch (authError) {
+    return dispatch(updatedUser({error: authError}))
+  }
+  try {
+    dispatch(updatedUser(res.data))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
@@ -178,6 +194,8 @@ export default function(state = defaultUser, action) {
     case GET_USER:
       return {...state, singleUser: action.singleUser}
     case CREATE_USER:
+      return {...state, singleUser: action.singleUser}
+    case UPDATE_USER:
       return {...state, singleUser: action.singleUser}
     case REMOVE_USER:
       return {...state, singleUser: {}}
