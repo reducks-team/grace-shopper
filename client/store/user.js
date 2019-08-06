@@ -81,6 +81,11 @@ export const createUser = state => async dispatch => {
     console.error(err)
   }
   try {
+    await axios.post(`/auth/login/${res.data}`)
+  } catch (err) {
+    console.error(err)
+  }
+  try {
     dispatch(createdUser(res.data))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
