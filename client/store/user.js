@@ -12,7 +12,7 @@ const UPDATE_USER = 'UPDATE_USER'
 const ADD_TO_CART = 'ADD_TO_CART'
 const UPDATE_CART = 'UPDATE_CART'
 const GET_CART = 'GET_CART'
-
+const CREATE_USER = 'CREATE_USER'
 const CLEAR_USER = 'CLEAR_USER'
 const CHECKOUT = 'CHECKOUT'
 const GET_ORDER_HISTORY = 'GET_ORDER_HISTORY'
@@ -28,6 +28,7 @@ const defaultUser = {
  * ACTION CREATORS
  */
 const gotUser = singleUser => ({type: GET_USER, singleUser})
+const createdUser = singleUser => ({type: CREATE_USER, singleUser})
 const removedUser = user => ({type: REMOVE_USER, user})
 const addedToCart = updatedCart => ({type: ADD_TO_CART, updatedCart})
 const updatedCart = updatedCart => ({type: UPDATE_CART, updatedCart})
@@ -61,6 +62,26 @@ export const auth = (email, password, method) => async dispatch => {
 
   try {
     dispatch(gotUser(res.data))
+    history.push('/home')
+  } catch (dispatchOrHistoryErr) {
+    console.error(dispatchOrHistoryErr)
+  }
+}
+
+export const createUser = state => async dispatch => {
+  let res
+  try {
+    res = await axios.post('/api/users', state)
+  } catch (authError) {
+    return dispatch(createdUser({error: authError}))
+  }
+  try {
+    await axios.post(`/api/cart/new/${res.data.id}`)
+  } catch (err) {
+    console.error(err)
+  }
+  try {
+    dispatch(createdUser(res.data))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
@@ -150,6 +171,8 @@ export const checkout = userId => async dispatch => {
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
+      return {...state, singleUser: action.singleUser}
+    case CREATE_USER:
       return {...state, singleUser: action.singleUser}
     case REMOVE_USER:
       return {...state, singleUser: {}}
