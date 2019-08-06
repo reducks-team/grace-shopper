@@ -61,13 +61,13 @@ async function seed() {
       name: 'Test Duck',
       description: 'This is our one test duck',
       imageUrl:
-        'https://cdn.shopify.com/s/files/1/0604/4801/products/Elvis_1-min-min_1024x1024.jpg?v=1534974546',
+        'https://cdn.shopify.com/s/files/1/0604/4801/products/Office_1_1024x1024.jpeg?v=1505544348',
       price: 69,
       inventory: 15,
       tags: ['donec', 'maximus']
     }),
     Product.create({
-      name: 'Rubber Turkey Duck',
+      name: 'Turkey Duck',
       imageUrl:
         'https://cdn.shopify.com/s/files/1/0604/4801/products/Turkey_1_1024x1024.jpeg?v=1505453354',
       description: 'thanksgiving duck',

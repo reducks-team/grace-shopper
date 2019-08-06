@@ -11,6 +11,7 @@ const REMOVE_USER = 'REMOVE_USER'
 const UPDATE_USER = 'UPDATE_USER'
 const ADD_TO_CART = 'ADD_TO_CART'
 const GET_CART = 'GET_CART'
+
 const CLEAR_USER = 'CLEAR_USER'
 const CHECKOUT = 'CHECKOUT'
 
@@ -28,6 +29,7 @@ const gotUser = singleUser => ({type: GET_USER, singleUser})
 const removedUser = user => ({type: REMOVE_USER, user})
 const addedToCart = updatedCart => ({type: ADD_TO_CART, updatedCart})
 const gotCart = activeCart => ({type: GET_CART, activeCart})
+
 const checkedOut = () => ({type: CHECKOUT})
 const clearedUser = () => ({type: CLEAR_USER})
 //const updateUser = user => ({type: UPDATE_USER, user})
@@ -81,7 +83,7 @@ export const addToCart = (userId, productId, productCost) => async dispatch => {
       `/api/cart/${userId}/${productId}/${productCost}`
     )
     dispatch(addedToCart(updatedCart))
-    history.push('/products')
+    history.push('/cart')
   } catch (err) {
     console.error(err)
   }
@@ -101,7 +103,7 @@ export const checkout = userId => async dispatch => {
     await axios.put(`/api/cart/checkout/${userId}`)
     await axios.post(`/api/cart/new/${userId}`)
     dispatch(checkedOut())
-    history.push('/products')
+    history.push('/Checkout')
   } catch (err) {
     console.error(err)
   }
