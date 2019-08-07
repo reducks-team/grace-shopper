@@ -35,7 +35,7 @@ const gotCart = activeCart => ({type: GET_CART, activeCart})
 const checkedOut = () => ({type: CHECKOUT})
 const clearedUser = () => ({type: CLEAR_USER})
 const gotOrderHistory = history => ({type: GET_ORDER_HISTORY, history})
-const updatedUser = user => ({type: UPDATE_USER, user})
+const updatedUser = updatedUser => ({type: UPDATE_USER, updatedUser})
 
 /**
  * THUNK CREATORS
@@ -200,7 +200,7 @@ export default function(state = defaultUser, action) {
     case CREATE_USER:
       return {...state, singleUser: action.singleUser}
     case UPDATE_USER:
-      return {...state, singleUser: action.singleUser}
+      return {...state, singleUser: action.updatedUser}
     case REMOVE_USER:
       return {...state, singleUser: {}}
     case ADD_TO_CART:

@@ -33,8 +33,6 @@ class CartRow extends Component {
       this.props.singleProduct.price,
       event.target.value
     )
-
-    console.log('quanity has changed!')
   }
 
   render() {

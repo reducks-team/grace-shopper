@@ -23,7 +23,8 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+//Currently this route is unused.  If it becomes used, it should be updated so that req.body is not passed in directly.  To prevent unauthorized access the route is being commented out until it is needed.
+/* router.post('/', async (req, res, next) => {
   try {
     const newProductOrder = await productOrder.create(req.body)
     res.send(newProductOrder)
@@ -31,9 +32,10 @@ router.post('/', async (req, res, next) => {
     console.dir(error)
     next(error)
   }
-})
+}) */
 
-router.put('/:id', async (req, res, next) => {
+//Currently this route is unused.  If it becomes used, it should be updated so that req.body is not passed in directly.  To prevent unauthorized access the route is being commented out until it is needed.
+/* router.put('/:id', async (req, res, next) => {
   try {
     const productOrderToUpdate = await productOrder.findByPk(
       Number(req.params.id)
@@ -46,9 +48,10 @@ router.put('/:id', async (req, res, next) => {
     console.dir(error)
     next(error)
   }
-})
+}) */
 
-router.delete('/:id', async (req, res, next) => {
+//To prevent unauthorized access this route is being commented out until it is needed.
+/* router.delete('/:id', async (req, res, next) => {
   try {
     const productOrderToDelete = await productOrder.findByPk(
       Number(req.params.id)
@@ -64,4 +67,4 @@ router.delete('/:id', async (req, res, next) => {
     console.error(error)
     next(error)
   }
-})
+}) */
