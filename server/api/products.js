@@ -4,9 +4,6 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    if (!req.body.isAdmin) {
-      res.json({error: 'unauthorized'})
-    }
     const products = await Product.findAll({})
     res.json(products)
   } catch (err) {

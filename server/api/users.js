@@ -28,6 +28,11 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
+    //This protects against unauthorized requests by checking whether the request body has the "allowed" parameter set to true, which an attacker wouldn't know to include but which the code will always include
+    if (!req.body.allowed) {
+      res.json({error: 'unauthorized'})
+      return
+    }
     //In this structure the only data that is captured on signUp is the email, password, firstName, and lastName (the required fields)
     const newUser = await User.create({
       email: req.body.email,
@@ -46,6 +51,12 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
+    //This protects against unauthorized requests by checking whether the request body has the "allowed" parameter set to true, which an attacker wouldn't know to include but which the code will always include
+    if (!req.body.allowed) {
+      res.json({error: 'unauthorized'})
+      return
+    }
+
     const userToUpdate = await User.findByPk(Number(req.params.id))
     !userToUpdate && res.sendStatus(404)
     await userToUpdate.update({

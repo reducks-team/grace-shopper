@@ -70,6 +70,9 @@ export const createUser = state => async dispatch => {
   let newUser
   let formData
   let userDataForState
+
+  //setting this allowed parameter on the body to be sent protects the route from unauthorized access.  An attacker would not know to have this paramenter, but the code will always include it
+  state.allowed = true
   try {
     postRes = await axios.post('/api/users', state)
     newUser = postRes.data.newUser
@@ -99,6 +102,9 @@ export const createUser = state => async dispatch => {
 
 export const updateUser = (user, userId) => async dispatch => {
   let res
+
+  //setting this allowed parameter on the body to be sent protects the route from unauthorized access.  An attacker would not know to have this paramenter, but the code will always include it
+  user.allowed = true
   try {
     res = await axios.put(`/api/users/${userId}`, user)
   } catch (authError) {
