@@ -37,7 +37,7 @@ class SingleProduct extends Component {
           />
           <h1>{this.props.singleProduct.name}</h1>
           <p>{this.props.singleProduct.description}</p>
-          <h2>${this.props.singleProduct.price / 100}</h2>
+          <h2>${(this.props.singleProduct.price / 100).toFixed(2)}</h2>
           <button
             onClick={() =>
               this.handleClick(
