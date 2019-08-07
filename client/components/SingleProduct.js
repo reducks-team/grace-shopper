@@ -3,11 +3,24 @@ import {connect} from 'react-redux'
 import {getProduct, addToCart} from '../store'
 
 class SingleProduct extends Component {
+  constructor(props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   componentDidMount() {
     try {
       this.props.getProduct(this.props.match.params.productId)
     } catch (error) {
       console.trace(error)
+    }
+  }
+
+  handleClick(userId, productId, price) {
+    if (!userId) {
+      alert('Please log in to add an item to the cart')
+    } else {
+      this.props.addToCart(userId, productId, price)
     }
   }
 
@@ -27,7 +40,7 @@ class SingleProduct extends Component {
           <h2>${this.props.singleProduct.price / 100}</h2>
           <button
             onClick={() =>
-              this.props.addToCart(
+              this.handleClick(
                 this.props.singleUser.id,
                 this.props.match.params.productId,
                 this.props.singleProduct.price
