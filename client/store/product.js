@@ -28,7 +28,7 @@ const gotProducts = allProducts => ({type: GET_PRODUCTS, allProducts})
  */
 export const getProducts = () => async dispatch => {
   try {
-    const res = await axios.get('/api/products')
+    const res = await axios.get('/api/products', {isAdmin: true})
     dispatch(gotProducts(res.data || defaultProduct.allProducts))
   } catch (err) {
     console.error(err)
