@@ -9,6 +9,8 @@ class CartRow extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    //In cartRow, we have to explicitly check every element of the cart to see if the quantity has changed.  This is the only way to make the field that allows you to enter in a number for your quantity work under the current structure.  With more time a more refined solution would probably be possible - Luke
+
     if (prevProps.singleUser.cart && this.props.singleUser.cart.data.length) {
       for (let i = 0; i < prevProps.singleUser.cart.data.length; i++) {
         if (
@@ -31,13 +33,10 @@ class CartRow extends Component {
       this.props.singleProduct.price,
       event.target.value
     )
-
-    console.log('quanity has changed!')
   }
 
   render() {
     if (this.props.product && this.props.cart.data) {
-      //   console.log(this.props.cart.data[this.props.product.id])
       let target = this.props.cart.data.filter(
         product => product.product.id === this.props.product.id
       )
@@ -54,7 +53,7 @@ class CartRow extends Component {
             />
 
             <h4>{this.props.product.name}</h4>
-            <h4>${this.props.product.price / 100}</h4>
+            <h4>${(this.props.product.price / 100).toFixed(2)}</h4>
             <h4> quantity: </h4>
 
             <input
@@ -63,7 +62,11 @@ class CartRow extends Component {
               value={target[0].quantity}
               onChange={this.handleQuantityChange}
             />
-            <h4>${this.props.product.price / 100 * target[0].quantity}</h4>
+            <h4>
+              ${(this.props.product.price * target[0].quantity / 100).toFixed(
+                2
+              )}
+            </h4>
           </div>
         )
       } else return <div />

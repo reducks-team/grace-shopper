@@ -5,7 +5,6 @@ import history from '../history'
 /**
  * ACTION TYPES
  */
-const GET_ALL_USERS = 'GET_ALL_USERS'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const UPDATE_USER = 'UPDATE_USER'
@@ -32,13 +31,11 @@ const createdUser = singleUser => ({type: CREATE_USER, singleUser})
 const removedUser = user => ({type: REMOVE_USER, user})
 const addedToCart = updatedCart => ({type: ADD_TO_CART, updatedCart})
 const updatedCart = updatedCart => ({type: UPDATE_CART, updatedCart})
-
 const gotCart = activeCart => ({type: GET_CART, activeCart})
-
 const checkedOut = () => ({type: CHECKOUT})
 const clearedUser = () => ({type: CLEAR_USER})
 const gotOrderHistory = history => ({type: GET_ORDER_HISTORY, history})
-const updatedUser = user => ({type: UPDATE_USER, user})
+const updatedUser = updatedUser => ({type: UPDATE_USER, updatedUser})
 
 /**
  * THUNK CREATORS
@@ -69,24 +66,35 @@ export const auth = (email, password, method) => async dispatch => {
 }
 
 export const createUser = state => async dispatch => {
-  let res
+  let postRes
+  let newUser
+  let formData
+  let userDataForState
+
+  //setting this allowed parameter on the body to be sent protects the route from unauthorized access.  An attacker would not know to have this paramenter, but the code will always include it
+  state.allowed = true
   try {
-    res = await axios.post('/api/users', state)
+    postRes = await axios.post('/api/users', state)
+    newUser = postRes.data.newUser
+
+    //Formdata is required to check the user's password in the form against the hash that was just created (will always match, but the login route will break if there's nothing to check) to log them in immediately upon signup
+    formData = postRes.data.body
+    formData.allowed = true
   } catch (authError) {
     return dispatch(createdUser({error: authError}))
   }
   try {
-    await axios.post(`/api/cart/new/${res.data.id}`)
+    await axios.post(`/api/cart/new/${newUser.id}`, {allowed: true})
   } catch (err) {
     console.error(err)
   }
   try {
-    await axios.post(`/auth/login/${res.data}`)
+    userDataForState = await axios.post(`/auth/login`, formData)
   } catch (err) {
     console.error(err)
   }
   try {
-    dispatch(createdUser(res.data))
+    dispatch(createdUser(userDataForState.data))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
@@ -95,8 +103,10 @@ export const createUser = state => async dispatch => {
 
 export const updateUser = (user, userId) => async dispatch => {
   let res
+
+  //setting this allowed parameter on the body to be sent protects the route from unauthorized access.  An attacker would not know to have this paramenter, but the code will always include it
+  user.allowed = true
   try {
-    console.log(user)
     res = await axios.put(`/api/users/${userId}`, user)
   } catch (authError) {
     return dispatch(updatedUser({error: authError}))
@@ -130,7 +140,8 @@ export const addToCart = (userId, productId, productCost) => async dispatch => {
     const updatedCart = await axios.put('/api/cart/add', {
       userId: userId,
       productId: productId,
-      productCost: productCost
+      productCost: productCost,
+      allowed: true
     })
     dispatch(addedToCart(updatedCart))
     history.push('/cart')
@@ -150,7 +161,8 @@ export const updateCart = (
       userId: userId,
       productId: productId,
       productCost: productCost,
-      quantity: quantity
+      quantity: quantity,
+      allowed: true
     })
     dispatch(updatedCart(newCart))
   } catch (err) {
@@ -178,8 +190,8 @@ export const getOrderHistory = userId => async dispatch => {
 
 export const checkout = userId => async dispatch => {
   try {
-    await axios.put(`/api/cart/checkout/${userId}`)
-    await axios.post(`/api/cart/new/${userId}`)
+    await axios.put(`/api/cart/checkout/${userId}`, {allowed: true})
+    await axios.post(`/api/cart/new/${userId}`, {allowed: true})
     dispatch(checkedOut())
     history.push('/Checkout')
   } catch (err) {
@@ -197,7 +209,7 @@ export default function(state = defaultUser, action) {
     case CREATE_USER:
       return {...state, singleUser: action.singleUser}
     case UPDATE_USER:
-      return {...state, singleUser: action.singleUser}
+      return {...state, singleUser: action.updatedUser}
     case REMOVE_USER:
       return {...state, singleUser: {}}
     case ADD_TO_CART:

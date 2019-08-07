@@ -17,14 +17,6 @@ const User = db.define('user', {
       isEmail: true
     }
   },
-  isAdmin: {
-    type: Sequelize.BOOLEAN,
-    allowNull: false,
-    defaultValue: false,
-    validate: {
-      notEmpty: true
-    }
-  },
   password: {
     type: Sequelize.STRING,
     // Making `.password` act like a func hides it when serializing to JSON.
@@ -55,6 +47,15 @@ const User = db.define('user', {
   },
   city: {
     type: Sequelize.STRING
+  },
+  //isAdmin is locate in the middle of all this for the sake of security, making it more difficult to guess where it comes in the table structure
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+    validate: {
+      notEmpty: true
+    }
   },
   state: {
     type: Sequelize.STRING

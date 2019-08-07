@@ -21,9 +21,8 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-//protect certain routes with a "passport"
-
-router.post('/', async (req, res, next) => {
+//Currently this route is unused.  If it becomes used, it should be updated so that req.body is not passed in directly.  To prevent unauthorized access the route is being commented out until it is needed.
+/* router.post('/', async (req, res, next) => {
   try {
     const newOrder = await Order.create(req.body)
     res.send(newOrder)
@@ -31,11 +30,10 @@ router.post('/', async (req, res, next) => {
     console.dir(error)
     next(error)
   }
-})
+}) */
 
-//protect certain routes with a "passport"
-
-router.put('/:id', async (req, res, next) => {
+//Currently this route is unused.  If it becomes used, it should be updated so that req.body is not passed in directly.  To prevent unauthorized access the route is being commented out until it is needed.
+/* router.put('/:id', async (req, res, next) => {
   try {
     const orderToUpdate = await Order.findByPk(Number(req.params.id))
     !orderToUpdate && res.sendStatus(404)
@@ -46,11 +44,10 @@ router.put('/:id', async (req, res, next) => {
     console.dir(error)
     next(error)
   }
-})
+}) */
 
-//protect certain routes with a "passport"
-
-router.delete('/:id', async (req, res, next) => {
+//To prevent unauthorized access this route is being commented out until it is needed.
+/* router.delete('/:id', async (req, res, next) => {
   try {
     const orderToDelete = await Order.findByPk(Number(req.params.id))
     !orderToDelete && res.sendStatus(404)
@@ -64,4 +61,4 @@ router.delete('/:id', async (req, res, next) => {
     console.error(error)
     next(error)
   }
-})
+}) */

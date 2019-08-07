@@ -28,9 +28,21 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const newUser = await User.create(req.body)
-    //req.login(user, err => (err ? next(err) : res.json(user)))
-    res.send(newUser)
+    //This protects against unauthorized requests by checking whether the request body has the "allowed" parameter set to true, which an attacker wouldn't know to include but which the code will always include
+    if (!req.body.allowed) {
+      res.json({error: 'unauthorized'})
+      return
+    }
+    //In this structure the only data that is captured on signUp is the email, password, firstName, and lastName (the required fields)
+    const newUser = await User.create({
+      email: req.body.email,
+      password: req.body.password,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName
+    })
+
+    //The newUser and the req.body must be sent so that the password in the form (stored in req.body) can be hashed and checked against the stored password (will always match but the route breaks without it), when the user creates an account and then immediately logs in
+    res.send({newUser, body: req.body})
   } catch (error) {
     console.dir(error)
     next(error)
@@ -39,12 +51,36 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    console.log(req.body)
-    console.log(req.params.id)
+    //This protects against unauthorized requests by checking whether the request body has the "allowed" parameter set to true, which an attacker wouldn't know to include but which the code will always include
+    if (!req.body.allowed) {
+      res.json({error: 'unauthorized'})
+      return
+    }
+
     const userToUpdate = await User.findByPk(Number(req.params.id))
     !userToUpdate && res.sendStatus(404)
-    await userToUpdate.update(req.body)
-
+    await userToUpdate.update({
+      email: req.body.email,
+      password: req.body.password,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      phoneNumber: req.body.phoneNumber,
+      streetAddress: req.body.streetAddress,
+      addressLineTwo: req.body.addressLineTwo,
+      city: req.body.city,
+      state: req.body.state,
+      country: req.body.country,
+      postalCode: req.body.postalCode,
+      billingStreetAddress: req.body.billingStreetAddress,
+      billingAddressLineTwo: req.body.billingAddressLineTwo,
+      billingCity: req.body.billingCity,
+      billingState: req.body.billingState,
+      billingCountry: req.body.billingCountry,
+      billingPostalCode: req.body.billingPostalCode,
+      creditCardNumber: req.body.creditCardNumber,
+      expirationDate: req.body.expirationDate,
+      securityCode: req.body.securityCode
+    })
     res.send(userToUpdate)
   } catch (error) {
     console.dir(error)
@@ -52,7 +88,8 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', async (req, res, next) => {
+//To prevent unauthorized access this route is being commented out until it is needed.
+/* router.delete('/:id', async (req, res, next) => {
   try {
     const userToDelete = await User.findByPk(Number(req.params.id))
     !userToDelete && res.sendStatus(404)
@@ -66,4 +103,4 @@ router.delete('/:id', async (req, res, next) => {
     console.error(error)
     next(error)
   }
-})
+}) */

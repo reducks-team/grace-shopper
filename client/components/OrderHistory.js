@@ -1,22 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getCart, checkout, getOrderHistory} from '../store'
+import {getCart, getOrderHistory} from '../store'
 import {OrderRow} from '.'
-import Button from '@material-ui/core/Button'
-import {Redirect} from 'react-router-dom'
 
 class OrderHistory extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  componentDidMount() {}
-
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     if (!this.props.singleUser.orderHistory) {
       this.props.getOrderHistory(this.props.singleUser.id)
     }
-    console.log(this.props.singleUser)
   }
 
   render() {

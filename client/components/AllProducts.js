@@ -32,8 +32,6 @@ class AllProducts extends Component {
                       title={product.name}
                       image={product.imageUrl}
                     />
-                    {/* <ProductThumbnail product={product} /> */}
-
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="h2">
                         {product.name}
