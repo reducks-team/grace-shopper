@@ -19,16 +19,19 @@ class FeaturedProducts extends Component {
   render() {
     return (
       <div style={{marginTop: 20, padding: 30}}>
+        <Grid container spacing={2} justify="flex-start ">
+          <h1 className="featured-products-title">Featured Products</h1>
+        </Grid>
         <Grid container spacing={2} justify="center">
           {this.props.allProducts.map(product => (
-            <Grid item key={product.id} xs={4}>
+            <Grid item key={product.id} xs={3}>
               <Link to={`/products/${product.id}`}>
                 <Card>
                   <CardActionArea>
                     <CardMedia
                       component="img"
                       alt={product.name}
-                      height="140"
+                      height="300"
                       title={product.name}
                       image={product.imageUrl}
                     />
@@ -43,7 +46,7 @@ class FeaturedProducts extends Component {
                   </CardActionArea>
                   <CardActions>
                     <Button size="small" color="primary">
-                      Add to Cart
+                      Details
                     </Button>
                   </CardActions>
                 </Card>
