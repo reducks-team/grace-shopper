@@ -48,7 +48,6 @@ router.put('/:id', async (req, res, next) => {
   try {
     const userToUpdate = await User.findByPk(Number(req.params.id))
     !userToUpdate && res.sendStatus(404)
-
     await userToUpdate.update({
       email: req.body.email,
       password: req.body.password,
@@ -71,7 +70,6 @@ router.put('/:id', async (req, res, next) => {
       expirationDate: req.body.expirationDate,
       securityCode: req.body.securityCode
     })
-
     res.send(userToUpdate)
   } catch (error) {
     console.dir(error)
