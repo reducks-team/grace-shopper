@@ -87,7 +87,7 @@ class SignUp extends Component {
     }
   }
 
-  //This method alerts the user that their signup failed (existing username), and then clears the singleUser:{error: authError} so that the alert does not display every single time the react component updates
+  //This method alerts the user that their signup failed (for any reason, but for now the message only mentions overlapping emails), and then clears the singleUser:{error: authError} so that the alert does not display every single time the react component updates
   componentDidUpdate() {
     if (this.props.singleUser) {
       if (this.props.singleUser.error) {

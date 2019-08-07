@@ -5,7 +5,6 @@ import history from '../history'
 /**
  * ACTION TYPES
  */
-const GET_ALL_USERS = 'GET_ALL_USERS'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const UPDATE_USER = 'UPDATE_USER'
@@ -32,9 +31,7 @@ const createdUser = singleUser => ({type: CREATE_USER, singleUser})
 const removedUser = user => ({type: REMOVE_USER, user})
 const addedToCart = updatedCart => ({type: ADD_TO_CART, updatedCart})
 const updatedCart = updatedCart => ({type: UPDATE_CART, updatedCart})
-
 const gotCart = activeCart => ({type: GET_CART, activeCart})
-
 const checkedOut = () => ({type: CHECKOUT})
 const clearedUser = () => ({type: CLEAR_USER})
 const gotOrderHistory = history => ({type: GET_ORDER_HISTORY, history})
@@ -69,24 +66,31 @@ export const auth = (email, password, method) => async dispatch => {
 }
 
 export const createUser = state => async dispatch => {
-  let res
+  let postRes
+  let newUser
+  let formData
+  let userDataForState
   try {
-    res = await axios.post('/api/users', state)
+    postRes = await axios.post('/api/users', state)
+    newUser = postRes.data.newUser
+
+    //Formdata is required to check the user's password in the form against the hash that was just created (will always match, but the login route will break if there's nothing to check) to log them in immediately upon signup
+    formData = postRes.data.body
   } catch (authError) {
     return dispatch(createdUser({error: authError}))
   }
   try {
-    await axios.post(`/api/cart/new/${res.data.id}`)
+    await axios.post(`/api/cart/new/${newUser.id}`)
   } catch (err) {
     console.error(err)
   }
   try {
-    await axios.post(`/auth/login/${res.data}`)
+    userDataForState = await axios.post(`/auth/login`, formData)
   } catch (err) {
     console.error(err)
   }
   try {
-    dispatch(createdUser(res.data))
+    dispatch(createdUser(userDataForState.data))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)

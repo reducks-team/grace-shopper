@@ -29,8 +29,7 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const newUser = await User.create(req.body)
-    //req.login(user, err => (err ? next(err) : res.json(user)))
-    res.send(newUser)
+    res.send({newUser, body: req.body})
   } catch (error) {
     console.dir(error)
     next(error)
@@ -39,8 +38,6 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    console.log(req.body)
-    console.log(req.params.id)
     const userToUpdate = await User.findByPk(Number(req.params.id))
     !userToUpdate && res.sendStatus(404)
     await userToUpdate.update(req.body)
