@@ -12,25 +12,33 @@ class SingleProduct extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <img src={this.props.singleProduct.imageUrl} height={300} width={300} />
-        <h1>{this.props.singleProduct.name}</h1>
-        <p>{this.props.singleProduct.description}</p>
-        <h2>${this.props.singleProduct.price / 100}</h2>
-        <button
-          onClick={() =>
-            this.props.addToCart(
-              this.props.singleUser.id,
-              this.props.match.params.productId,
-              this.props.singleProduct.price
-            )
-          }
-        >
-          Add To Cart
-        </button>
-      </div>
-    )
+    if (!this.props.singleProduct.id) {
+      return <div />
+    } else {
+      return (
+        <div>
+          <img
+            src={this.props.singleProduct.imageUrl}
+            height={300}
+            width={300}
+          />
+          <h1>{this.props.singleProduct.name}</h1>
+          <p>{this.props.singleProduct.description}</p>
+          <h2>${this.props.singleProduct.price / 100}</h2>
+          <button
+            onClick={() =>
+              this.props.addToCart(
+                this.props.singleUser.id,
+                this.props.match.params.productId,
+                this.props.singleProduct.price
+              )
+            }
+          >
+            Add To Cart
+          </button>
+        </div>
+      )
+    }
   }
 }
 
