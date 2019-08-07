@@ -1,6 +1,5 @@
 body {
   font-family: sans-serif;
-  background-color: #blue;
 }
 
 a {
@@ -10,7 +9,13 @@ a {
 label {
   display: block;
 }
+#app > div > div:nth-child(2) {
+  background-color: white;
+}
 
+#app > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > h4 {
+  color: #00bcd4;
+}
 nav a {
   display: inline-block;
   margin: 1em;
