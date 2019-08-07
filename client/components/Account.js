@@ -7,7 +7,7 @@ export default function Account() {
     <div>
       <h1>Account Component</h1>
       <AccountUpdateForm />
-      <OrderHistory />
+      {/* <OrderHistory /> */}
     </div>
   )
 }
