@@ -11,6 +11,10 @@ import {connect} from 'react-redux'
 import {getProducts} from '../store'
 import {ProductThumbnail} from './'
 
+const style = {
+  boxShadow: 'none'
+}
+
 class FeaturedProducts extends Component {
   componentDidMount() {
     this.props.getProducts()
@@ -20,7 +24,11 @@ class FeaturedProducts extends Component {
     return (
       <div style={{marginTop: 20, padding: 30}}>
         <Grid container spacing={2} justify="flex-start ">
-          <h1 className="featured-products-title">Featured Products</h1>
+          <h4 className="featured-products-title" fontFamily="primary">
+            <Typography variant="h4" component="h2">
+              Featured Products
+            </Typography>
+          </h4>
         </Grid>
         <Grid container spacing={2} justify="center">
           {this.props.allProducts.map(product => (
@@ -34,9 +42,15 @@ class FeaturedProducts extends Component {
                       height="300"
                       title={product.name}
                       image={product.imageUrl}
+                      style={style}
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2">
+                      <Typography
+                        gutterBottom
+                        variant="h5"
+                        component="h2"
+                        style={style}
+                      >
                         {product.name}
                       </Typography>
                       <Typography component="p">
