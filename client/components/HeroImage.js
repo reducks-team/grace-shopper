@@ -4,13 +4,13 @@ import React from 'react'
 const HeroImage = () => {
   return (
     <div>
-      <h1>Title</h1>
       <img
         className="heroImg"
         src="/images/heroImg.jpg"
-        height={500}
-        width={600}
-        mode="fit"
+        height={400}
+        width={500}
+        // mode="fit"
+        justify="center"
       />
     </div>
   )

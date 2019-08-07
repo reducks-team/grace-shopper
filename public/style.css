@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  background-color: #blue;
 }
 
 a {
@@ -27,6 +28,19 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.heroImg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 2vh;
+}
+
+.featured-products-title {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cart-row {
