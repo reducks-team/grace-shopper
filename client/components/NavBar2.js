@@ -13,7 +13,8 @@ import {makeStyles} from '@material-ui/core/styles'
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: '#00BCD4',
-    textColor: '#FFFFFF'
+    textColor: '#FFFFFF',
+    shadows: ['none']
   }
 }))
 
@@ -89,8 +90,10 @@ function Navbar2({isLoggedIn, clickLogout}) {
  * CONTAINER
  */
 const mapState = state => {
-  return {
-    isLoggedIn: !!state.user.singleUser.id
+  if (state.user.singleUser) {
+    return {
+      isLoggedIn: !!state.user.singleUser.id
+    }
   }
 }
 

@@ -3,14 +3,14 @@
  * This way, we can import all of our components from the same place, rather than
  * having to figure out which file they belong to!
  */
-export {default as Navbar} from './Navbar'
+// export {default as Navbar} from './Navbar'
 export {About} from './About'
 export {default as Footer} from './Footer'
 export {default as SignIn} from './SignIn'
 export {default as FeaturedProducts} from './FeaturedProducts'
 export {default as SignUp} from './SignUp'
 export {default as AccountUpdateForm} from './AccountUpdateForm'
-export {default as OrderHistory} from './OrderHistory'
+// export {default as OrderHistory} from './OrderHistory'
 export {default as AllProducts} from './AllProducts'
 export {default as ProductThumbnail} from './ProductThumbnail'
 export {default as SingleProduct} from './SingleProduct'

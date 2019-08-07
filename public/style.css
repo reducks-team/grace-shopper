@@ -9,7 +9,13 @@ a {
 label {
   display: block;
 }
+#app > div > div:nth-child(2) {
+  background-color: white;
+}
 
+#app > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > h4 {
+  color: #00bcd4;
+}
 nav a {
   display: inline-block;
   margin: 1em;
@@ -27,6 +33,19 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.heroImg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 2vh;
+}
+
+.featured-products-title {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cart-row {
