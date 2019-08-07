@@ -9,6 +9,8 @@ class CartRow extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    //In cartRow, we have to explicitly check every element of the cart to see if the quantity has changed.  This is the only way to make the field that allows you to enter in a number for your quantity work under the current structure.  With more time a more refined solution would probably be possible - Luke
+
     if (prevProps.singleUser.cart && this.props.singleUser.cart.data.length) {
       for (let i = 0; i < prevProps.singleUser.cart.data.length; i++) {
         if (
@@ -37,7 +39,6 @@ class CartRow extends Component {
 
   render() {
     if (this.props.product && this.props.cart.data) {
-      //   console.log(this.props.cart.data[this.props.product.id])
       let target = this.props.cart.data.filter(
         product => product.product.id === this.props.product.id
       )
