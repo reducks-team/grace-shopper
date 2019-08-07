@@ -90,8 +90,10 @@ function Navbar2({isLoggedIn, clickLogout}) {
  * CONTAINER
  */
 const mapState = state => {
-  return {
-    isLoggedIn: !!state.user.singleUser
+  if (state.user.singleUser) {
+    return {
+      isLoggedIn: !!state.user.singleUser.id
+    }
   }
 }
 
