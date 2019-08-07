@@ -62,7 +62,11 @@ class CartRow extends Component {
               value={target[0].quantity}
               onChange={this.handleQuantityChange}
             />
-            <h4>${this.props.product.price / 100 * target[0].quantity}</h4>
+            <h4>
+              ${(this.props.product.price * target[0].quantity / 100).toFixed(
+                2
+              )}
+            </h4>
           </div>
         )
       } else return <div />

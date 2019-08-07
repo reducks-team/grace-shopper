@@ -70,13 +70,17 @@ class Cart extends Component {
             />
           ))}
 
-          <h4 className="total">SubTotal: ${totalPrice / 100}</h4>
+          <h4 className="total">SubTotal: ${(totalPrice / 100).toFixed(2)}</h4>
           <h4 className="shipping">Shipping: FREE</h4>
           <h4 className="tax">
-            Estimated Tax: ${Math.round(totalPrice / 100 * 0.06 * 100) / 100}
+            Estimated Tax: ${(
+              Math.round(totalPrice / 100 * 0.06 * 100) / 100
+            ).toFixed(2)}
           </h4>
           <h2 className="grandTotal">
-            Total: ${Math.round(totalPrice / 100 * 1.06 * 100) / 100}
+            Total: ${(Math.round(totalPrice / 100 * 1.06 * 100) / 100).toFixed(
+              2
+            )}
           </h2>
           <Button
             onClick={this.handleSubmit}
