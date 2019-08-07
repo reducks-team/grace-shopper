@@ -39,6 +39,12 @@ router.get('/history/:userId', async (req, res, next) => {
 //This route gets the active cart, checks whether an item exists in the cart or not, and then either creates an entry for it or updates the existing entry as appropriate.  Then it returns the new cart with the appropriate quantities
 router.put('/add', async (req, res, next) => {
   try {
+    //This protects against unauthorized requests by checking whether the request body has the "allowed" parameter set to true, which an attacker wouldn't know to include but which the code will always include
+    if (!req.body.allowed) {
+      res.json({error: 'unauthorized'})
+      return
+    }
+
     const activeCart = await Order.findOne({
       where: {userId: Number(req.body.userId), isActive: true},
       attributes: ['id']
@@ -80,6 +86,12 @@ router.put('/add', async (req, res, next) => {
 
 router.put('/update', async (req, res, next) => {
   try {
+    //This protects against unauthorized requests by checking whether the request body has the "allowed" parameter set to true, which an attacker wouldn't know to include but which the code will always include
+    if (!req.body.allowed) {
+      res.json({error: 'unauthorized'})
+      return
+    }
+
     const activeCart = await Order.findOne({
       where: {userId: Number(req.body.userId), isActive: true},
       attributes: ['id']
@@ -115,6 +127,12 @@ router.put('/update', async (req, res, next) => {
 //This route creates a new active order
 router.post('/new/:userId', async (req, res, next) => {
   try {
+    //This protects against unauthorized requests by checking whether the request body has the "allowed" parameter set to true, which an attacker wouldn't know to include but which the code will always include
+    if (!req.body.allowed) {
+      res.json({error: 'unauthorized'})
+      return
+    }
+
     const newCart = await Order.create({userId: req.params.userId})
     res.send(newCart)
   } catch (error) {
@@ -126,6 +144,12 @@ router.post('/new/:userId', async (req, res, next) => {
 //This route flips the current active cart to a historical order
 router.put('/checkout/:userId', async (req, res, next) => {
   try {
+    //This protects against unauthorized requests by checking whether the request body has the "allowed" parameter set to true, which an attacker wouldn't know to include but which the code will always include
+    if (!req.body.allowed) {
+      res.json({error: 'unauthorized'})
+      return
+    }
+
     const updatedCart = await Order.update(
       {isActive: false},
       {where: {userId: req.params.userId, isActive: true}}

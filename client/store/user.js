@@ -79,11 +79,12 @@ export const createUser = state => async dispatch => {
 
     //Formdata is required to check the user's password in the form against the hash that was just created (will always match, but the login route will break if there's nothing to check) to log them in immediately upon signup
     formData = postRes.data.body
+    formData.allowed = true
   } catch (authError) {
     return dispatch(createdUser({error: authError}))
   }
   try {
-    await axios.post(`/api/cart/new/${newUser.id}`)
+    await axios.post(`/api/cart/new/${newUser.id}`, {allowed: true})
   } catch (err) {
     console.error(err)
   }
@@ -139,7 +140,8 @@ export const addToCart = (userId, productId, productCost) => async dispatch => {
     const updatedCart = await axios.put('/api/cart/add', {
       userId: userId,
       productId: productId,
-      productCost: productCost
+      productCost: productCost,
+      allowed: true
     })
     dispatch(addedToCart(updatedCart))
     history.push('/cart')
@@ -159,7 +161,8 @@ export const updateCart = (
       userId: userId,
       productId: productId,
       productCost: productCost,
-      quantity: quantity
+      quantity: quantity,
+      allowed: true
     })
     dispatch(updatedCart(newCart))
   } catch (err) {
@@ -187,8 +190,8 @@ export const getOrderHistory = userId => async dispatch => {
 
 export const checkout = userId => async dispatch => {
   try {
-    await axios.put(`/api/cart/checkout/${userId}`)
-    await axios.post(`/api/cart/new/${userId}`)
+    await axios.put(`/api/cart/checkout/${userId}`, {allowed: true})
+    await axios.post(`/api/cart/new/${userId}`, {allowed: true})
     dispatch(checkedOut())
     history.push('/Checkout')
   } catch (err) {
