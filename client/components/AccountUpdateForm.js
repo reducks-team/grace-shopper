@@ -89,320 +89,324 @@ class AccountUpdateForm extends Component {
 
   render() {
     const {classes, singleUser} = this.props
-    return (
-      <div>
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Update Your Account Information
-            </Typography>
-            <form className={classes.form} onSubmit={this.handleSubmit}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    name="firstName"
-                    type="text"
-                    id="firstName"
-                    label="First Name"
-                    autoComplete="fname"
-                    value={this.state.firstName}
-                    defaultValue={singleUser.firstName}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    required
-                    fullWidth
-                    autoFocus
-                  />
+    if (singleUser) {
+      return (
+        <div>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <div className={classes.paper}>
+              <Avatar className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                Update Your Account Information
+              </Typography>
+              <form className={classes.form} onSubmit={this.handleSubmit}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      name="firstName"
+                      type="text"
+                      id="firstName"
+                      label="First Name"
+                      autoComplete="fname"
+                      value={this.state.firstName}
+                      defaultValue={singleUser.firstName}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      required
+                      fullWidth
+                      autoFocus
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      name="lastName"
+                      type="text"
+                      id="lastName"
+                      label="Last Name"
+                      defaultValue={singleUser.lastName}
+                      value={this.state.lastName}
+                      onChange={this.handleChange}
+                      autoComplete="lname"
+                      variant="outlined"
+                      required
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="email"
+                      type="text"
+                      id="email"
+                      label="Email Address"
+                      defaultValue={singleUser.email}
+                      value={this.state.email}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      required
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="password"
+                      type="password"
+                      id="password"
+                      label="Password"
+                      defaultValue={singleUser.password}
+                      value={this.state.password}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      required
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="phoneNumber"
+                      type="text"
+                      id="phoneNumber"
+                      label="Phone Number"
+                      defaultValue={singleUser.phoneNumber}
+                      value={this.state.phoneNumber}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="streetAddress"
+                      type="text"
+                      id="streetAddress"
+                      label="Street Address"
+                      defaultValue={singleUser.streetAddress}
+                      value={this.state.streetAddress}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="addressLineTwo"
+                      type="text"
+                      id="addressLineTwo"
+                      label="Address Line Two"
+                      defaultValue={singleUser.addressLineTwo}
+                      value={this.state.addressLineTwo}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="city"
+                      type="text"
+                      id="city"
+                      label="City"
+                      defaultValue={singleUser.city}
+                      value={this.state.city}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="state"
+                      type="text"
+                      id="state"
+                      label="State"
+                      value={this.state.state}
+                      defaultValue={singleUser.state}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="country"
+                      type="country"
+                      id="country"
+                      label="Country"
+                      defaultValue={singleUser.country}
+                      value={this.state.country}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="postalCode"
+                      type="number"
+                      id="postalCode"
+                      label="Postal Code"
+                      defaultValue={singleUser.postalCode}
+                      value={this.state.postalCode}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="billingStreetAddress"
+                      type="text"
+                      id="billingStreetAddress"
+                      label="Billing Street Address"
+                      defaultValue={singleUser.billingStreetAddress}
+                      value={this.state.billingStreetAddress}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="billingAddressLineTwo"
+                      type="text"
+                      id="billingAddressLineTwo"
+                      label="Billing Address LineTwo"
+                      defaultValue={singleUser.billingAddressLineTwo}
+                      value={this.state.billingAddressLineTwo}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="billingCity"
+                      type="text"
+                      id="billingCity"
+                      label="Billing City"
+                      defaultValue={singleUser.billingCity}
+                      value={this.state.billingCity}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="billingState"
+                      type="text"
+                      id="billingState"
+                      label="Billing State"
+                      defaultValue={singleUser.billingState}
+                      value={this.state.billingState}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="billingCountry"
+                      type="text"
+                      id="billingCountry"
+                      label="Billing Country"
+                      defaultValue={singleUser.billingCountry}
+                      value={this.state.billingCountry}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="billingPostalCode"
+                      type="number"
+                      id="billingPostalCode"
+                      label="billingPostalCode"
+                      defaultValue={singleUser.billingPostalCode}
+                      value={this.state.billingPostalCode}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="creditCardNumber"
+                      type="number"
+                      id="creditCardNumber"
+                      label="Credit Card Number"
+                      defaultValue={singleUser.creditCardNumber}
+                      value={this.state.creditCardNumber}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="expirationDateMonth"
+                      type="number"
+                      id="expirationDateMonth"
+                      label="Month"
+                      defaultValue={singleUser.expirationDateMonth}
+                      value={this.state.expirationDateMonth}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="expirationDateYear"
+                      type="number"
+                      id="expirationDateYear"
+                      label="Year"
+                      value={this.state.expirationDateYear}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="securityCode"
+                      type="securityCode"
+                      id="securityCode"
+                      label="Security Code"
+                      defaultValue={singleUser.securityCode}
+                      value={this.state.securityCode}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Grid>
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    name="lastName"
-                    type="text"
-                    id="lastName"
-                    label="Last Name"
-                    defaultValue={singleUser.lastName}
-                    value={this.state.lastName}
-                    onChange={this.handleChange}
-                    autoComplete="lname"
-                    variant="outlined"
-                    required
-                    fullWidth
-                  />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                >
+                  Submit
+                </Button>
+                <Grid container justify="flex-end">
+                  <Grid item>
+                    <Link href="#" variant="body2">
+                      Already have an account? Sign in
+                    </Link>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="email"
-                    type="text"
-                    id="email"
-                    label="Email Address"
-                    defaultValue={singleUser.email}
-                    value={this.state.email}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    required
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="password"
-                    type="password"
-                    id="password"
-                    label="Password"
-                    defaultValue={singleUser.password}
-                    value={this.state.password}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    required
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="phoneNumber"
-                    type="text"
-                    id="phoneNumber"
-                    label="Phone Number"
-                    defaultValue={singleUser.phoneNumber}
-                    value={this.state.phoneNumber}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="streetAddress"
-                    type="text"
-                    id="streetAddress"
-                    label="Street Address"
-                    defaultValue={singleUser.streetAddress}
-                    value={this.state.streetAddress}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="addressLineTwo"
-                    type="text"
-                    id="addressLineTwo"
-                    label="Address Line Two"
-                    defaultValue={singleUser.addressLineTwo}
-                    value={this.state.addressLineTwo}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="city"
-                    type="text"
-                    id="city"
-                    label="City"
-                    defaultValue={singleUser.city}
-                    value={this.state.city}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="state"
-                    type="text"
-                    id="state"
-                    label="State"
-                    value={this.state.state}
-                    defaultValue={singleUser.state}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="country"
-                    type="country"
-                    id="country"
-                    label="Country"
-                    defaultValue={singleUser.country}
-                    value={this.state.country}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="postalCode"
-                    type="number"
-                    id="postalCode"
-                    label="Postal Code"
-                    defaultValue={singleUser.postalCode}
-                    value={this.state.postalCode}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="billingStreetAddress"
-                    type="text"
-                    id="billingStreetAddress"
-                    label="Billing Street Address"
-                    defaultValue={singleUser.billingStreetAddress}
-                    value={this.state.billingStreetAddress}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="billingAddressLineTwo"
-                    type="text"
-                    id="billingAddressLineTwo"
-                    label="Billing Address LineTwo"
-                    defaultValue={singleUser.billingAddressLineTwo}
-                    value={this.state.billingAddressLineTwo}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="billingCity"
-                    type="text"
-                    id="billingCity"
-                    label="Billing City"
-                    defaultValue={singleUser.billingCity}
-                    value={this.state.billingCity}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="billingState"
-                    type="text"
-                    id="billingState"
-                    label="Billing State"
-                    defaultValue={singleUser.billingState}
-                    value={this.state.billingState}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="billingCountry"
-                    type="text"
-                    id="billingCountry"
-                    label="Billing Country"
-                    defaultValue={singleUser.billingCountry}
-                    value={this.state.billingCountry}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="billingPostalCode"
-                    type="number"
-                    id="billingPostalCode"
-                    label="billingPostalCode"
-                    defaultValue={singleUser.billingPostalCode}
-                    value={this.state.billingPostalCode}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="creditCardNumber"
-                    type="number"
-                    id="creditCardNumber"
-                    label="Credit Card Number"
-                    defaultValue={singleUser.creditCardNumber}
-                    value={this.state.creditCardNumber}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="expirationDateMonth"
-                    type="number"
-                    id="expirationDateMonth"
-                    label="Month"
-                    defaultValue={singleUser.expirationDateMonth}
-                    value={this.state.expirationDateMonth}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="expirationDateYear"
-                    type="number"
-                    id="expirationDateYear"
-                    label="Year"
-                    value={this.state.expirationDateYear}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="securityCode"
-                    type="securityCode"
-                    id="securityCode"
-                    label="Security Code"
-                    defaultValue={singleUser.securityCode}
-                    value={this.state.securityCode}
-                    onChange={this.handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Grid>
-              </Grid>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                Submit
-              </Button>
-              <Grid container justify="flex-end">
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    Already have an account? Sign in
-                  </Link>
-                </Grid>
-              </Grid>
-            </form>
-          </div>
-        </Container>
-      </div>
-    )
+              </form>
+            </div>
+          </Container>
+        </div>
+      )
+    } else {
+      return <div />
+    }
   }
 }
 

@@ -103,6 +103,7 @@ export const updateUser = (user, userId) => async dispatch => {
   }
   try {
     dispatch(updatedUser(res.data))
+    dispatch(gotUser(res.data))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)

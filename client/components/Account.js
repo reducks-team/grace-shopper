@@ -5,8 +5,9 @@ import AccountUpdateForm from './AccountUpdateForm'
 export default function Account() {
   return (
     <div>
+      <h1>Account Component</h1>
       <AccountUpdateForm />
-      <OrderHistory />
+      {/* <OrderHistory /> */}
     </div>
   )
 }

@@ -67,9 +67,11 @@ class SignIn extends Component {
 
   //This method alerts the user that they have an incorrect field, and then clears the singleUser:{error: authError} so that the alert does not display every single time the react component updates
   componentDidUpdate() {
-    if (this.props.singleUser.error) {
-      alert('Incorrect username and/or password')
-      this.props.clearUser()
+    if (this.props.singleUser) {
+      if (this.props.singleUser.error) {
+        alert('Incorrect username and/or password')
+        this.props.clearUser()
+      }
     }
   }
 
