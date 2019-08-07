@@ -115,7 +115,6 @@ router.put('/update', async (req, res, next) => {
 //This route creates a new active order
 router.post('/new/:userId', async (req, res, next) => {
   try {
-    console.log(req.body)
     const newCart = await Order.create({userId: req.params.userId})
     res.send(newCart)
   } catch (error) {

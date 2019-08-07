@@ -14,7 +14,7 @@ import Container from '@material-ui/core/Container'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {withStyles} from '@material-ui/core/styles'
 import {connect} from 'react-redux'
-import {createUser} from '../store'
+import {createUser, clearUser} from '../store'
 
 const styles = theme => ({
   '@global': {
@@ -87,7 +87,15 @@ class SignUp extends Component {
     }
   }
 
-  componentDidMount() {}
+  //This method alerts the user that their signup failed (existing username), and then clears the singleUser:{error: authError} so that the alert does not display every single time the react component updates
+  componentDidUpdate() {
+    if (this.props.singleUser) {
+      if (this.props.singleUser.error) {
+        alert('That email is taken, please use another')
+        this.props.clearUser()
+      }
+    }
+  }
 
   render() {
     const {classes} = this.props
@@ -398,7 +406,8 @@ const mapDispatchToProps = dispatch => {
   return {
     signUpUser: state => {
       dispatch(createUser(state))
-    }
+    },
+    clearUser: () => dispatch(clearUser())
   }
 }
 

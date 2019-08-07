@@ -96,7 +96,6 @@ export const createUser = state => async dispatch => {
 export const updateUser = (user, userId) => async dispatch => {
   let res
   try {
-    console.log(user)
     res = await axios.put(`/api/users/${userId}`, user)
   } catch (authError) {
     return dispatch(updatedUser({error: authError}))
